@@ -42,6 +42,13 @@ $LUVIT_REPO = $LUVIT_REPO -join ""
 $LUVI_REPO = $LUVI_REPO -join ""
 $LIT_REPO = $LIT_REPO -join ""
 
+# Fetch tags to properly version binaries
+Write-Host "Fetching Tags..."
+
+Start-Process -FilePath "git" -Wait -NoNewWindow -ArgumentList "--git-dir='$LUVIT_REPO/.git'", "fetch", "--tags" > $null
+Start-Process -FilePath "git" -Wait -NoNewWindow -ArgumentList "--git-dir='$LUVI_REPO/.git'", "fetch", "--tags" > $null
+Start-Process -FilePath "git" -Wait -NoNewWindow -ArgumentList "--git-dir='$LIT_REPO/.git'", "fetch", "--tags" > $null
+
 $LUVIT_VERSION=(git --git-dir="$LUVIT_REPO/.git" describe) -replace "\-.+", "" -replace "v", ""
 $LUVI_VERSION=(git --git-dir="$LUVI_REPO/.git" describe) -replace "\-.+", "" -replace "v", ""
 $LIT_VERSION=(git --git-dir="$LIT_REPO/.git" describe) -replace "\-.+", "" -replace "v", ""

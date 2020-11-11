@@ -38,6 +38,13 @@ if [ ! -d $LUVIT_REPO ] || [ ! -d $LUVI_REPO ] || [ ! -d $LIT_REPO ]; then
     exit 1
 fi
 
+# Fetch tags to properly version binaries
+echo "Fetching Tags..."
+
+git --git-dir="$LUVIT_REPO/.git" fetch --tags
+git --git-dir="$LUVI_REPO/.git" fetch --tags
+git --git-dir="$LIT_REPO/.git" fetch --tags
+
 LUVIT_VERSION=$(git --git-dir="$LUVIT_REPO/.git" describe | sed -Ee 's/\-.+//' -e 's/v//')
 LUVI_VERSION=$(git --git-dir="$LUVI_REPO/.git" describe | sed -Ee 's/\-.+//' -e 's/v//')
 LIT_VERSION=$(git --git-dir="$LIT_REPO/.git" describe | sed -Ee 's/\-.+//' -e 's/v//')
