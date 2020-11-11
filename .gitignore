@@ -1,0 +1,8 @@
+# Cloned Repositories
+*.git
+
+# Executables
+*.exe
+lit
+luvi
+luvit
