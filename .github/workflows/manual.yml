@@ -3,7 +3,7 @@ name: Weekly Luvit Build
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 0 * * 0"
+    - cron: '0 0 * * 0'
 
 jobs:
   setup:
@@ -209,7 +209,7 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v2
         with:
-          go-version: "^1.15.0"
+          go-version: '^1.15.0'
 
       - name: Setup GHR
         run: |
