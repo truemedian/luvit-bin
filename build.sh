@@ -84,13 +84,13 @@ echo "Installing Luvi to $ARTIFACTS"
 
 cp ./build/luvi $ARTIFACTS/luvi
 
-echo "Building Lit $LIT_VERSION"
+echo "Building Lit"
 
 cd $LIT_REPO
 
 "$ARTIFACTS/luvi" "." -- make "." "$ARTIFACTS/lit" "$ARTIFACTS/luvi"
 
-echo "Building Luvit $LUVIT_VERSION"
+echo "Building Luvit"
 
 cd $LUVIT_REPO
 

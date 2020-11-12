@@ -93,13 +93,13 @@ Write-Host "Installing Luvi to $ARTIFACTS"
 
 Copy-Item -Path "./luvi.exe" -Destination "$ARTIFACTS/luvi.exe"
 
-Write-Host "Building Lit $LIT_VERSION"
+Write-Host "Building Lit"
 
 Set-Location $LIT_REPO
 
 Start-Process -FilePath "$ARTIFACTS/luvi.exe" -Wait -NoNewWindow -ArgumentList ".", "--", "make", ".", "$ARTIFACTS/lit.exe", "$ARTIFACTS/luvi.exe"
 
-Write-Host "Building Luvit $LUVIT_VERSION"
+Write-Host "Building Luvit"
 
 Set-Location $LUVIT_REPO
 
