@@ -41,9 +41,9 @@ fi
 # Fetch tags to properly version binaries
 echo "Fetching Tags..."
 
-git --git-dir="$LUVIT_REPO/.git" fetch --tags
-git --git-dir="$LUVI_REPO/.git" fetch --tags
-git --git-dir="$LIT_REPO/.git" fetch --tags
+git --git-dir="$LUVIT_REPO/.git" fetch --tags --no-recurse-submodules
+git --git-dir="$LUVI_REPO/.git" fetch --tags --no-recurse-submodules
+git --git-dir="$LIT_REPO/.git" fetch --tags --no-recurse-submodules
 
 LUVIT_VERSION=$(git --git-dir="$LUVIT_REPO/.git" describe | sed -Ee 's/\-.+//' -e 's/v//')
 LUVI_VERSION=$(git --git-dir="$LUVI_REPO/.git" describe | sed -Ee 's/\-.+//' -e 's/v//')
