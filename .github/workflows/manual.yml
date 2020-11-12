@@ -230,6 +230,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           ghr \
+            -replace \
             -n "Luvit ${{ env.VERSION }}" \
             -b "Weekly Luvit Binary Release" \
             "${{ env.VERSION }}" releases/
