@@ -49,9 +49,12 @@ Start-Process -FilePath "git" -Wait -NoNewWindow -ArgumentList "--git-dir='$LUVI
 Start-Process -FilePath "git" -Wait -NoNewWindow -ArgumentList "--git-dir='$LUVI_REPO/.git'", "fetch", "--tags", "--no-recurse-submodules" > $null
 Start-Process -FilePath "git" -Wait -NoNewWindow -ArgumentList "--git-dir='$LIT_REPO/.git'", "fetch", "--tags", "--no-recurse-submodules" > $null
 
-$LUVIT_VERSION=(git --git-dir="$LUVIT_REPO/.git" describe) -replace "\-.+", "" -replace "v", ""
-$LUVI_VERSION=(git --git-dir="$LUVI_REPO/.git" describe) -replace "\-.+", "" -replace "v", ""
-$LIT_VERSION=(git --git-dir="$LIT_REPO/.git" describe) -replace "\-.+", "" -replace "v", ""
+Start-Process -FilePath "git" -Wait -NoNewWindow -ArgumentList "--git-dir='$LUVI_REPO/.git'", "fetch", "--tags", "--no-recurse-submodules"
+
+$LATEST_TAGGED_COMMIT=(git --git-dir="$LUVI_REPO/.git" rev-list --tags --max-count=1)
+$LUVI_VERSION=(git --git-dir="$LUVI_REPO/.git" describe --tags "$LATEST_TAGGED_COMMIT")
+
+Write-Output "$LUVI_VERSION" | Out-File -FilePath "$LUVI_REPO/VERSION"
 
 Write-Host "Installation Configuration"
 Write-Host "  SYSTEM: $SYSTEM"
@@ -64,9 +67,7 @@ Write-Host "  LUVIT_REPO: $LUVIT_REPO"
 Write-Host "  LUVI_REPO: $LUVI_REPO"
 Write-Host "  LIT_REPO: $LIT_REPO"
 Write-Host ""
-Write-Host "  LUVIT_VERSION: $LUVIT_VERSION"
 Write-Host "  LUVI_VERSION: $LUVI_VERSION"
-Write-Host "  LIT_VERSION: $LIT_VERSION"
 
 if ($Fake -eq $True) {
     exit 0

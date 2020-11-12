@@ -39,15 +39,13 @@ if [ ! -d $LUVIT_REPO ] || [ ! -d $LUVI_REPO ] || [ ! -d $LIT_REPO ]; then
 fi
 
 # Fetch tags to properly version binaries
-echo "Fetching Tags..."
-
-git --git-dir="$LUVIT_REPO/.git" fetch --tags --no-recurse-submodules
+echo "Fetching Luvi Version..."
 git --git-dir="$LUVI_REPO/.git" fetch --tags --no-recurse-submodules
-git --git-dir="$LIT_REPO/.git" fetch --tags --no-recurse-submodules
 
-LUVIT_VERSION=$(git --git-dir="$LUVIT_REPO/.git" describe | sed -Ee 's/\-.+//' -e 's/v//')
-LUVI_VERSION=$(git --git-dir="$LUVI_REPO/.git" describe | sed -Ee 's/\-.+//' -e 's/v//')
-LIT_VERSION=$(git --git-dir="$LIT_REPO/.git" describe | sed -Ee 's/\-.+//' -e 's/v//')
+LATEST_TAGGED_COMMIT=$(git --git-dir="$LUVI_REPO/.git" rev-list --tags --max-count=1)
+LUVI_VERSION=$(git --git-dir="$LUVI_REPO/.git" describe --tags "$LATEST_TAGGED_COMMIT")
+
+echo "$LUVI_VERSION" > "$LUVI_REPO/VERSION"
 
 echo "Installation Configuration"
 echo "  SYSTEM: $SYSTEM"
@@ -60,9 +58,7 @@ echo "  LUVIT_REPO: $LUVIT_REPO"
 echo "  LUVI_REPO: $LUVI_REPO"
 echo "  LIT_REPO: $LIT_REPO"
 echo ""
-echo "  LUVIT_VERSION: $LUVIT_VERSION"
 echo "  LUVI_VERSION: $LUVI_VERSION"
-echo "  LIT_VERSION: $LIT_VERSION"
 
 if [ "$FAKE" = "true" ]; then
     exit 0
