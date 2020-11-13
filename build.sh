@@ -7,15 +7,15 @@ COMPRESS=false
 while [ $# -gt 0 ]; do
     case "$1" in
         -q|--fake)
-            FAKE=true
-            shift;;
+            FAKE=true;;
         -c|--compress)
-            COMPRESS=true
-            shift;;
+            COMPRESS=true;;
         *)
             echo "unknown argument: $1"
             exit 1;;
     esac
+
+    shift
 done
 
 _date_version=$(date +%Y%m%d)
