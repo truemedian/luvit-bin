@@ -96,22 +96,17 @@ check_dep() {
     fi
 }
 
-check_dep git
-
 check_dep cc gcc
 check_dep cc clang
 
 check_dep cxx g++
 check_dep cxx clang++
 
+check_dep git
 check_dep cmake
-
+check_dep make
 check_dep perl
-
-if [ -z $has_git ]; then
-    log_error "Missing git"
-    exit 1
-fi
+check_dep getconf
 
 if [ -z $has_cc ]; then
     log_error "Missing C Compiler (gcc, clang)"
@@ -123,13 +118,28 @@ if [ -z $has_cxx ]; then
     exit 1
 fi
 
+if [ -z $has_git ]; then
+    log_error "Missing git"
+    exit 1
+fi
+
 if [ -z $has_cmake ]; then
     log_error "Missing cmake"
     exit 1
 fi
 
+if [ -z $has_make ]; then
+    log_error "Missing make"
+    exit 1
+fi
+
 if [ -z $has_perl ]; then
     log_error "Missing perl"
+    exit 1
+fi
+
+if [ -z $has_getconf ]; then
+    log_error "Missing getconf"
     exit 1
 fi
 
@@ -207,8 +217,8 @@ if [ -e build ]; then
     rm -r build
 fi
 
-CPUS=$(getconf _NPROCESSORS_ONLN 2>/dev/null) ||
-    CPUS=$(getconf NPROCESSORS_ONLN 2>/dev/null) ||
+CPUS=$($getconf_command _NPROCESSORS_ONLN 2>/dev/null) ||
+    CPUS=$($getconf_command NPROCESSORS_ONLN 2>/dev/null) ||
     CPUS=1
 
 run_cmd $cmake_command -H. -Bbuild $CMAKE_FLAGS -DCMAKE_C_COMPILER="$cc_command" -DCMAKE_ASM_COMPILER="$cc_command" -DCMAKE_CXX_COMPILER="$cxx_command"
