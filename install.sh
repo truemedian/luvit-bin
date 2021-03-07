@@ -212,7 +212,7 @@ CPUS=$(getconf _NPROCESSORS_ONLN 2>/dev/null) ||
     CPUS=1
 
 run_cmd $cmake_command -H. -Bbuild $CMAKE_FLAGS -DCMAKE_C_COMPILER="$cc_command" -DCMAKE_ASM_COMPILER="$cc_command" -DCMAKE_CXX_COMPILER="$cxx_command"
-run_cmd $cmake_command --build build -j$CPUS
+run_cmd $cmake_command --build build -j $CPUS
 
 cp build/luvi "${build_root}/luvi"
 luvi_command="${build_root}/luvi"
