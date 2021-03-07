@@ -4,6 +4,9 @@ set -u
 DEFAULT_CMAKE_FLAGS="-DCMAKE_BUILD_TYPE=Release -DWithSharedLibluv=OFF -DWithOpenSSL=ON -DWithSharedOpenSSL=OFF -DWithOpenSSLASM=ON -DWithPCRE=ON -DWithLPEG=ON -DWithSharedPCRE=OFF"
 CMAKE_FLAGS=${CMAKE_FLAGS-$DEFAULT_CMAKE_FLAGS}
 
+DEFAULT_INSTALL_PREFIX="${HOME}/.local/bin"
+INSTALL_PREFIX=${PREFIX-$DEFAULT_INSTALL_PREFIX}
+
 build_root=$(pwd)
 
 c_reset='\033[0m'
@@ -15,6 +18,12 @@ c_blue='\033[1;34m'
 c_magenta='\033[1;35m'
 c_cyan='\033[1;36m'
 c_white='\033[1;37m'
+
+realdir() {
+    cd $1
+
+    pwd
+}
 
 _indent() {
     printf "    "
@@ -46,7 +55,7 @@ run_cmd() {
 
     _echo "$ ${cmd}" >>"${build_root}/install.log"
 
-    if [ "$1" = "$cmake_command" ] || [ "$1" = "$git_command" ]; then
+    if [ "$1" = "${cmake_command}" ] || [ "$1" = "${git_command}" ]; then
         $@ >>"${build_root}/install.log" 2>&1
     else
         $@ >>"${build_root}/install.log"
@@ -59,89 +68,56 @@ log_info "Installation Log at ${build_root}/install.log"
 
 log_info "Checking For Dependencies"
 
-# check_dep [name] [command]
+# check_dep [name] [commands...]
 check_dep() {
-    name=$1
+    name="$1"
+    shift
 
-    simple=
-    if [ -z "${2-}" ]; then
-        cmd=$name
-        simple=0
-    else
-        cmd=$2
+    attempts="$@"
+    if [ $# -gt 1 ]; then
+        _indent
+        log_info "${name} (${attempts})"
+
+        has_choices=0
     fi
 
-    path=$(command -v ${cmd})
+    while [ $# -gt 0 ]; do
+        path=$(command -v $1 || true)
 
-    if [ $? = 0 ]; then
-        if [ -z $simple ]; then
+        if [ "${path}" != "" ]; then
+            [ -n "${has_choices-}" ] && _indent
             _indent
-            _echo "${c_green}[*]${c_reset} ${name} via ${cmd}"
+
+            _echo "${c_green}[*]${c_reset} $1"
+
+            has_dep=0
+            eval "${name}_command='${path}'; ${name}_using='$1'"
+
+            break
         else
+            [ -n "${has_choices-}" ] && _indent
             _indent
-            _echo "${c_green}[*]${c_reset} ${name}"
+
+            _echo "${c_red}[#]${c_reset} $1"
         fi
 
-        eval "${name}_command='${path}'; ${name}_using='${cmd}'; has_${name}=0"
-    else
-        if [ -z $simple ]; then
-            _indent
-            _echo "${c_red}[#]${c_reset} ${name} via ${cmd}"
-        else
-            _indent
-            _echo "${c_red}[#]${c_reset} ${name}"
-        fi
+        shift
+    done
 
-        eval "${name}_command=\${${name}_command-}; ${name}_using=\${${name}_using-}; has_${name}=\${has_${name}-}"
+    if [ -z "${has_dep-}" ]; then
+        log_error "Missing ${name} (${attempts})"
+        exit 1
     fi
 }
 
-check_dep cc gcc
-check_dep cc clang
+check_dep cc ${CC-} clang gcc cc
+check_dep cxx ${CXX-} clang++ g++ c++
 
-check_dep cxx g++
-check_dep cxx clang++
-
-check_dep git
-check_dep cmake
-check_dep make
-check_dep perl
-check_dep getconf
-
-if [ -z $has_cc ]; then
-    log_error "Missing C Compiler (gcc, clang)"
-    exit 1
-fi
-
-if [ -z $has_cxx ]; then
-    log_error "Missing C++ Compiler (g++, clang++)"
-    exit 1
-fi
-
-if [ -z $has_git ]; then
-    log_error "Missing git"
-    exit 1
-fi
-
-if [ -z $has_cmake ]; then
-    log_error "Missing cmake"
-    exit 1
-fi
-
-if [ -z $has_make ]; then
-    log_error "Missing make"
-    exit 1
-fi
-
-if [ -z $has_perl ]; then
-    log_error "Missing perl"
-    exit 1
-fi
-
-if [ -z $has_getconf ]; then
-    log_error "Missing getconf"
-    exit 1
-fi
+check_dep git git
+check_dep cmake cmake
+check_dep make make
+check_dep perl perl
+check_dep getconf getconf
 
 log_info "Setting Up Repositories"
 
@@ -183,8 +159,8 @@ fi
 latest_ref=$($git_command rev-parse HEAD)
 latest_tagged=$($git_command rev-list --tags --max-count=1)
 LUVI_VERSION=$($git_command describe --tags "${latest_tagged}")
-if [ "$latest_tagged" != "$latest_ref" ]; then
-    LUVI_VERSION="$LUVI_VERSION-dev"
+if [ "${latest_tagged}" != "${latest_ref}" ]; then
+    LUVI_VERSION="${LUVI_VERSION}-dev"
 fi
 cd $build_root
 
@@ -205,10 +181,19 @@ else
     cd $build_root
 fi
 
+log_info "Setting Up Installation Location (${INSTALL_PREFIX})"
+mkdir -p "${INSTALL_PREFIX}"
+
+INSTALL_PREFIX=$(realdir "${INSTALL_PREFIX}")
+
+luvi_command="${INSTALL_PREFIX}/luvi"
+lit_command="${INSTALL_PREFIX}/lit"
+luvit_command="${INSTALL_PREFIX}/luvit"
+
 log_info "Building Luvi (this will take some time...)"
 cd luvi.d
 
-printf "$LUVI_VERSION" >VERSION
+printf "${LUVI_VERSION}" >VERSION
 
 if [ -e build ]; then
     _indent
@@ -221,20 +206,19 @@ CPUS=$($getconf_command _NPROCESSORS_ONLN 2>/dev/null) ||
     CPUS=$($getconf_command NPROCESSORS_ONLN 2>/dev/null) ||
     CPUS=1
 
-run_cmd $cmake_command -H. -Bbuild $CMAKE_FLAGS -DCMAKE_C_COMPILER="$cc_command" -DCMAKE_ASM_COMPILER="$cc_command" -DCMAKE_CXX_COMPILER="$cxx_command"
-run_cmd $cmake_command --build build -j $CPUS
+run_cmd $cmake_command -H. -Bbuild ${CMAKE_FLAGS} -DCMAKE_C_COMPILER="${cc_command}" -DCMAKE_ASM_COMPILER="${cc_command}" -DCMAKE_CXX_COMPILER="${cxx_command}"
+run_cmd $cmake_command --build build -j ${CPUS}
 
-cp build/luvi "${build_root}/luvi"
-luvi_command="${build_root}/luvi"
+cp build/luvi "$luvi_command"
 cd $build_root
 
 log_info "Building Lit"
-lit_command="${build_root}/lit"
-run_cmd $luvi_command lit.d -- make lit.d $lit_command $luvi_command
+run_cmd "${luvi_command}" lit.d -- make lit.d "${lit_command}" "${luvi_command}"
 
 log_info "Building Luvit"
-luvit_command="${build_root}/luvit"
-run_cmd $lit_command make luvit.d $luvit_command $luvi_command
+run_cmd "${lit_command}" make luvit.d "${luvit_command}" "${luvi_command}"
 
 log_info "Cleaning Up"
 rm -rf *.d
+
+log_info "Installation Complete @ ${INSTALL_PREFIX}"
