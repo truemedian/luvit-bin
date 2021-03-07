@@ -1,8 +1,11 @@
 # Cloned Repositories
-*.git
+*.d
 
 # Executables
 *.exe
 lit
 luvi
 luvit
+
+# Installation log
+install.log
