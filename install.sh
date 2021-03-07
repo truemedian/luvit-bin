@@ -92,7 +92,7 @@ check_dep() {
             _echo "${c_red}[#]${c_reset} ${name}"
         fi
 
-        eval "${name}_command=; ${name}_using=; has_${name}="
+        eval "${name}_command=\${${name}_command-}; ${name}_using=\${${name}_using-}; has_${name}=\${has_${name}-}"
     fi
 }
 
