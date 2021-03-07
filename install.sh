@@ -1,5 +1,5 @@
 #!/bin/env sh
-set -eu
+set -u
 
 DEFAULT_CMAKE_FLAGS="-DCMAKE_BUILD_TYPE=Release -DWithSharedLibluv=OFF -DWithOpenSSL=ON -DWithSharedOpenSSL=OFF -DWithOpenSSLASM=ON -DWithPCRE=ON -DWithLPEG=ON -DWithSharedPCRE=OFF"
 CMAKE_FLAGS=${CMAKE_FLAGS-$DEFAULT_CMAKE_FLAGS}
