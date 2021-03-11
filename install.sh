@@ -73,6 +73,7 @@ check_dep() {
     name="$1"
     shift
 
+    unset has_choices
     attempts="$@"
     if [ $# -gt 1 ]; then
         _indent
@@ -81,6 +82,7 @@ check_dep() {
         has_choices=0
     fi
 
+    unset has_dep
     while [ $# -gt 0 ]; do
         path=$(command -v $1 || true)
 
