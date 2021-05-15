@@ -31,7 +31,18 @@ been designed to be easy to read.
 ### Configuration
 
 | Variable    | Meaning                                         |
+| ----------- | ----------------------------------------------- |
 | CMAKE_FLAGS | Will overwrite the script's default cmake flags |
 | PREFIX      | Will change the final executable's location.    |
 
 `PREFIX` will default to `$HOME/.local/bin`, set it if this does not match your system setup.
+
+### Running
+
+You can either download and run it yourself, or run
+
+```shell
+curl -L https://github.com/truemedian/luvit-bin/raw/master/install.sh | sh
+```
+
+To download and run the script automatically.
