@@ -1,0 +1,221 @@
+name: Weekly Luvit Build
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * 0"
+
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout truemedian/luvit-bin
+        uses: actions/checkout@v2
+
+      - name: Clone
+        run: |
+          chmod u+x build.sh
+
+          ./build.sh clone
+
+      - name: Build Luvi
+        run: |
+          ./build.sh luvi
+
+      - name: Build Lit
+        run: |
+          ./build.sh lit
+
+      - name: Build Luvit
+        run: |
+          ./build.sh luvit
+
+      - name: Package
+        run: |
+          ./build.sh package
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.artifact }}
+          path: build/${{ env.artifact }}
+
+    outputs:
+      luvit_info: ${{ env.luvit_info }}
+      luvi_info: ${{ env.luvi_info }}
+      lit_info: ${{ env.lit_info }}
+
+  darwin:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout truemedian/luvit-bin
+        uses: actions/checkout@v2
+
+      - name: Clone
+        run: |
+          chmod u+x build.sh
+
+          ./build.sh clone
+
+      - name: Build Luvi
+        run: |
+          ./build.sh luvi
+
+      - name: Build Lit
+        run: |
+          ./build.sh lit
+
+      - name: Build Luvit
+        run: |
+          ./build.sh luvit
+
+      - name: Package
+        run: |
+          ./build.sh package
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.artifact }}
+          path: build/${{ env.artifact }}
+
+  windows:
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        arch: [i386, x86_64]
+    env:
+      BUILD_ARCH: ${{ matrix.arch }}
+    steps:
+      - name: Checkout truemedian/luvit-bin
+        uses: actions/checkout@v2
+
+      - name: Cache Dependencies
+        uses: actions/cache@v2
+        id: cache
+        with:
+          path: C:\Program Files\NASM
+          key: ${{ runner.os }}-nasm
+
+      - name: Install Dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        shell: pwsh
+        run: |
+          choco install NASM
+
+      - name: Setup PATH
+        shell: pwsh
+        run: |
+          Write-Output "C:\Program Files\NASM" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
+      - name: Clone
+        run: |
+          ./build.ps1 clone
+
+      - name: Build Luvi
+        run: |
+          ./build.ps1 luvi
+
+      - name: Build Lit
+        run: |
+          ./build.ps1 lit
+
+      - name: Build Luvit
+        run: |
+          ./build.ps1 luvit
+
+      - name: Package
+        run: |
+          ./build.ps1 package
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.artifact }}
+          path: build/${{ env.artifact }}
+
+  linux-arm:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        arch: [armv6, armv7]
+    steps:
+      - name: Checkout truemedian/luvit-bin
+        uses: actions/checkout@v2
+
+      - name: Clone
+        run: |
+          chmod u+x build.sh
+
+          ./build.sh clone
+
+      - uses: uraimo/run-on-arch-action@v2.0.7
+        name: Build
+        with:
+          distro: stretch
+          arch: ${{ matrix.arch }}
+
+          shell: /bin/bash
+          dockerRunArgs: |
+            --env GITHUB_ENV
+            --volume '"${GITHUB_ENV}:${GITHUB_ENV}"'
+          install: |
+            apt-get update -q -y
+            apt-get install -q -y build-essential perl git cmake
+          run: |
+            ./build.sh luvi
+            ./build.sh lit
+            ./build.sh luvit
+            ./build.sh package
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.artifact }}
+          path: build/${{ env.artifact }}
+
+  release:
+    needs:
+      [
+        linux,
+        darwin,
+        windows,
+        linux-arm,
+      ]
+    runs-on: ubuntu-latest
+    env:
+      luvit_info: ${{ needs.linux.outputs.luvit_info }}
+      luvi_info: ${{ needs.linux.outputs.luvi_info }}
+      lit_info: ${{ needs.linux.outputs.lit_info }}
+    steps:
+      - name: Checkout truemedian/luvit-bin
+        uses: actions/checkout@v2
+
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: "^1.15.0"
+
+      - name: Setup GHR
+        run: |
+          go get -u github.com/tcnksm/ghr
+
+          echo "VERSION=$(date '+%Y-%m-%d')" >>$GITHUB_ENV
+
+      - name: Download Artifacts
+        uses: actions/download-artifact@v2
+        with:
+          path: build
+
+      - name: Collect Artifacts
+        run: |
+          mkdir -p releases/
+          cp build/**/* releases/
+
+      - name: Upload Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ghr \
+            -replace \
+            -n "Luvit ${{ env.VERSION }}" \
+            -b "Luvit $luvit_info<br>Luvi $luvi_info<br>Lit $lit_info<br><br>Weekly Release" \
+            "${{ env.VERSION }}" releases/

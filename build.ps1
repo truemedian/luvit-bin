@@ -1,123 +1,90 @@
 $ErrorActionPreference = 'Stop' 
 $ProgressPreference = "SilentlyContinue"
 
-$Fake = $False
-$Compress = $False
+$_build = "$(Get-Location)/build"
 
-for ($i = 0; $i -lt $args.count; $i++) {
-    switch -regex ($args[$i]) {
-        "-q|--fake" { $Fake = $True }
-        "-c|--compress" { $Compress = $True }
-        Default {
-            Write-Host "unknown argument: ${args[$i]}"
-            exit 1
-        }
+function __clone() {
+    mkdir ${_build}
+    Write-Output "" | Out-File -FilePath "${_build}/INFO" -Encoding utf8 -Append -NoNewline
+
+    &git clone https://github.com/luvit/luvit luvit.git --depth 1 --recurse-submodules --shallow-submodules
+    &git clone https://github.com/luvit/luvi luvi.git --depth 1 --recurse-submodules --shallow-submodules
+    &git clone https://github.com/luvit/lit lit.git --depth 1 --recurse-submodules --shallow-submodules
+}
+
+function __luvi() {
+    Set-Location luvi.git
+
+    &git fetch --tags --prune --progress --no-recurse-submodules --depth=1 origin master
+
+    $latest_tagged = $(git rev-list --tags --max-count=1)
+    $luvi_version = $(git describe --tags "$latest_tagged")
+    if ( "${latest_tagged}" -ne "$(git rev-parse HEAD)" ) {
+        $luvi_version = "${luvi_version}-dev+$(git rev-parse --short HEAD)"
     }
-} 
 
-$LUVIT_REPO = "luvit.git"
-$LUVI_REPO = "luvi.git"
-$LIT_REPO = "lit.git"
-$VERSION = Get-Date -Format "yyyyMMdd"
-$ARTIFACTS = Resolve-Path -Path .
-$SYSTEM = "Windows"
+    Write-Output $luvi_version | Out-File -FilePath "VERSION" -Encoding utf8 -Append
 
-if ([System.Environment]::Is64BitProcess) {
-    $ARCH = "x86_64"
-} else {
-    $ARCH = "i686"
-}
-
-if (Test-Path env:LUVIT_REPO) { $LUVIT_REPO = $env:LUVIT_REPO }
-if (Test-Path env:LUVI_REPO) { $LUVI_REPO = $env:LUVI_REPO }
-if (Test-Path env:LIT_REPO) { $LIT_REPO = $env:LIT_REPO }
-if (Test-Path env:VERSION) { $VERSION = $env:VERSION }
-if (Test-Path env:ARTIFACTS) { $ARTIFACTS = $env:ARTIFACTS }
-
-Resolve-Path -Path "$LUVIT_REPO" -OutVariable LUVIT_REPO > $null
-Resolve-Path -Path "$LUVI_REPO" -OutVariable LUVI_REPO > $null
-Resolve-Path -Path "$LIT_REPO" -OutVariable LIT_REPO > $null
-
-$LUVIT_REPO = $LUVIT_REPO -join ""
-$LUVI_REPO = $LUVI_REPO -join ""
-$LIT_REPO = $LIT_REPO -join ""
-
-# Fetch tags to properly version binaries
-Write-Host "Fetching Tags..."
-
-Start-Process -FilePath "git" -Wait -NoNewWindow -ArgumentList "--git-dir='$LUVIT_REPO/.git'", "fetch", "--tags", "--no-recurse-submodules" > $null
-Start-Process -FilePath "git" -Wait -NoNewWindow -ArgumentList "--git-dir='$LUVI_REPO/.git'", "fetch", "--tags", "--no-recurse-submodules" > $null
-Start-Process -FilePath "git" -Wait -NoNewWindow -ArgumentList "--git-dir='$LIT_REPO/.git'", "fetch", "--tags", "--no-recurse-submodules" > $null
-
-Start-Process -FilePath "git" -Wait -NoNewWindow -ArgumentList "--git-dir='$LUVI_REPO/.git'", "fetch", "--tags", "--no-recurse-submodules"
-
-$LATEST_TAGGED_COMMIT=(git --git-dir="$LUVI_REPO/.git" rev-list --tags --max-count=1)
-$LUVI_VERSION=(git --git-dir="$LUVI_REPO/.git" describe --tags "$LATEST_TAGGED_COMMIT")
-
-Write-Output "$LUVI_VERSION" | Out-File -FilePath "$LUVI_REPO/VERSION"
-
-Write-Host "Installation Configuration"
-Write-Host "  SYSTEM: $SYSTEM"
-Write-Host "  ARCH: $ARCH"
-Write-Host ""
-Write-Host "  ARTIFACTS: $ARTIFACTS"
-Write-Host "  VERSION: $VERSION"
-Write-Host ""
-Write-Host "  LUVIT_REPO: $LUVIT_REPO"
-Write-Host "  LUVI_REPO: $LUVI_REPO"
-Write-Host "  LIT_REPO: $LIT_REPO"
-Write-Host ""
-Write-Host "  LUVI_VERSION: $LUVI_VERSION"
-
-if ($Fake -eq $True) {
-    exit 0
-} else {
-    Write-Host ""
-}
-
-Write-Host "Configuring Installation Directory: $ARTIFACTS"
-
-New-Item -Path "$ARTIFACTS" -ItemType Directory -ErrorAction SilentlyContinue > $null
-
-Write-Host "Building Luvi $LUVI_VERSION"
-
-Set-Location $LUVI_REPO
-
-Start-Process -FilePath "./make.bat" -Wait -NoNewWindow -ArgumentList "clean"
-Start-Process -FilePath "./make.bat" -Wait -NoNewWindow -ArgumentList "reset"
-Start-Process -FilePath "./make.bat" -Wait -NoNewWindow -ArgumentList "regular-asm"
-Start-Process -FilePath "./make.bat" -Wait -NoNewWindow 
-Start-Process -FilePath "./make.bat" -Wait -NoNewWindow -ArgumentList "test"
-
-Write-Host "Installing Luvi to $ARTIFACTS"
-
-Copy-Item -Path "./luvi.exe" -Destination "$ARTIFACTS/luvi.exe"
-
-Write-Host "Building Lit"
-
-Set-Location $LIT_REPO
-
-Start-Process -FilePath "$ARTIFACTS/luvi.exe" -Wait -NoNewWindow -ArgumentList ".", "--", "make", ".", "$ARTIFACTS/lit.exe", "$ARTIFACTS/luvi.exe"
-
-Write-Host "Building Luvit"
-
-Set-Location $LUVIT_REPO
-
-Start-Process -FilePath "$ARTIFACTS/lit.exe" -Wait -NoNewWindow -ArgumentList "make", ".", "$ARTIFACTS/luvit.exe", "$ARTIFACTS/luvi.exe"
-
-Write-Host "Builds Complete"
-
-if ($Compress -eq $True) {
-    Set-Location $ARTIFACTS
-
-    $tarball = "luvit-$VERSION-$SYSTEM-$ARCH.zip"
-
-    Compress-Archive -Path "luvit.exe", "luvi.exe", "lit.exe" -DestinationPath "$tarball" -CompressionLevel "Optimal"
-
-    if (Test-Path env:GITHUB_ENV) {
-        Write-Output "TARBALL=$tarball" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+    if ( "$env:BUILD_ARCH" -eq "i386" ) {
+        &./make.bat regular32-asm
     }
+    else {
+        &./make.bat regular-asm
+    }
+    &./make.bat
+    &./make.bat test
+
+    Move-Item luvi.exe ${_build}
+
+    Write-Output "Luvi $luvi_version" | Out-File -FilePath "${_build}/INFO" -Encoding utf8 -Append
 }
 
-# See: PowerShell/PowerShell Issue #11461
-exit 0
+function __lit() {
+    Set-Location lit.git
+
+    &git fetch --tags --prune --progress --no-recurse-submodules --depth=1 origin master
+
+    $latest_tagged = $(git rev-list --tags --max-count=1)
+    $lit_version = $(git describe --tags "$latest_tagged")
+    if ( "${latest_tagged}" -ne "$(git rev-parse HEAD)" ) {
+        $lit_version = "${lit_version}-dev+$(git rev-parse --short HEAD)"
+    }
+
+    &${_build}/luvi.exe . -- make . ${_build}/lit.exe ${_build}/luvi.exe
+
+    Write-Output "Lit $lit_version" | Out-File -FilePath "${_build}/INFO" -Encoding utf8 -Append
+}
+
+function __luvit() {
+    Set-Location luvit.git
+
+    &git fetch --tags --prune --progress --no-recurse-submodules --depth=1 origin master
+
+    $latest_tagged = $(git rev-list --tags --max-count=1)
+    $luvit_version = $(git describe --tags "$latest_tagged")
+    if ( "${latest_tagged}" -ne "$(git rev-parse HEAD)" ) {
+        $luvit_version = "${luvit_version}-dev+$(git rev-parse --short HEAD)"
+    }
+
+    &${_build}/lit.exe make . ${_build}/luvit.exe ${_build}/luvi.exe
+
+    Write-Output "Luvit $luvit_version" | Out-File -FilePath "${_build}/INFO" -Encoding utf8 -Append
+}
+
+function __package() {
+    Set-Location build
+
+    $artifact = "luvit-bin-Windows-$env:BUILD_ARCH.zip"
+    Write-Output "Packaged: $(date '+%Y-%m-%d %H:%M:%S %:z')" | Out-File -FilePath "${_build}/INFO" -Encoding utf8 -Append
+    Write-Output "artifact=$artifact"  | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+
+    &7z a -tzip -mx9 $artifact *
+}
+
+switch ($args[0]) {
+    "clone" { __clone }
+    "luvi" { __luvi }
+    "lit" { __lit }
+    "luvit" { __luvit }
+    "package" { __package }
+}

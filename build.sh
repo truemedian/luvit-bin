@@ -1,111 +1,95 @@
 #!/bin/bash
 set -eu
 
-FAKE=false
-COMPRESS=false
+_build="$PWD/build"
 
-while [ $# -gt 0 ]; do
-    case "$1" in
-        -q|--fake)
-            FAKE=true;;
-        -c|--compress)
-            COMPRESS=true;;
-        *)
-            echo "unknown argument: $1"
-            exit 1;;
-    esac
+__clone() {
+    mkdir -p ${_build}
+    echo -n >${_build}/INFO
 
-    shift
-done
+    git clone https://github.com/luvit/luvit luvit.git --depth 1 --recurse-submodules --shallow-submodules
+    git clone https://github.com/luvit/luvi luvi.git --depth 1 --recurse-submodules --shallow-submodules
+    git clone https://github.com/luvit/lit lit.git --depth 1 --recurse-submodules --shallow-submodules
 
-_date_version=$(date +%Y%m%d)
+}
 
-LUVIT_REPO=${LUVIT_REPO:-luvit.git}
-LUVI_REPO=${LUVI_REPO:-luvi.git}
-LIT_REPO=${LIT_REPO:-lit.git}
-VERSION=${VERSION:-$_date_version}
-ARTIFACTS=${ARTIFACTS:-.}
-SYSTEM=$(uname -s)
-ARCH=$(uname -m)
+__luvi() {
+    cd luvi.git
 
-LUVIT_REPO=$(realpath $LUVIT_REPO)
-LUVI_REPO=$(realpath $LUVI_REPO)
-LIT_REPO=$(realpath $LIT_REPO)
-ARTIFACTS=$(realpath $ARTIFACTS)
+    git fetch --tags --prune --progress --no-recurse-submodules --depth=1 origin master
 
-if [ ! -d $LUVIT_REPO ] || [ ! -d $LUVI_REPO ] || [ ! -d $LIT_REPO ]; then
-    echo "error: repositories not checked out"
-    exit 1
-fi
-
-# Fetch tags to properly version binaries
-echo "Fetching Luvi Version..."
-git --git-dir="$LUVI_REPO/.git" fetch --tags --no-recurse-submodules
-
-LATEST_TAGGED_COMMIT=$(git --git-dir="$LUVI_REPO/.git" rev-list --tags --max-count=1)
-LUVI_VERSION=$(git --git-dir="$LUVI_REPO/.git" describe --tags "$LATEST_TAGGED_COMMIT")
-
-echo "$LUVI_VERSION" > "$LUVI_REPO/VERSION"
-
-echo "Installation Configuration"
-echo "  SYSTEM: $SYSTEM"
-echo "  ARCH: $ARCH"
-echo ""
-echo "  ARTIFACTS: $ARTIFACTS"
-echo "  VERSION: $VERSION"
-echo ""
-echo "  LUVIT_REPO: $LUVIT_REPO"
-echo "  LUVI_REPO: $LUVI_REPO"
-echo "  LIT_REPO: $LIT_REPO"
-echo ""
-echo "  LUVI_VERSION: $LUVI_VERSION"
-
-if [ "$FAKE" = "true" ]; then
-    exit 0
-else
-    echo ""
-fi
-
-echo "Configuring Installation Directory: $ARTIFACTS"
-
-mkdir -p $ARTIFACTS
-
-echo "Building Luvi $LUVI_VERSION"
-
-cd $LUVI_REPO
-
-make clean
-make reset
-make regular-asm
-make
-make test
-
-echo "Installing Luvi to $ARTIFACTS"
-
-cp ./build/luvi $ARTIFACTS/luvi
-
-echo "Building Lit"
-
-cd $LIT_REPO
-
-"$ARTIFACTS/luvi" "." -- make "." "$ARTIFACTS/lit" "$ARTIFACTS/luvi"
-
-echo "Building Luvit"
-
-cd $LUVIT_REPO
-
-"$ARTIFACTS/lit" make "." "$ARTIFACTS/luvit" "$ARTIFACTS/luvi"
-
-echo "Builds Complete"
-
-if [ "$COMPRESS" = "true" ]; then
-    cd $ARTIFACTS
-
-    _tarball="luvit-$VERSION-$SYSTEM-$ARCH.tar.gz"
-
-    tar czf "$_tarball" luvit luvi lit
-
-    if [ -e $GITHUB_ENV ]; then
-        echo "TARBALL=$_tarball" >> $GITHUB_ENV
+    latest_tagged=$(git rev-list --tags --max-count=1)
+    luvi_version=$(git describe --tags "$latest_tagged")
+    if [ "${latest_tagged}" != "$(git rev-parse HEAD)" ]; then
+        luvi_version="${luvi_version}-dev+$(git rev-parse --short HEAD)"
     fi
-fi
+
+    echo $luvi_version >VERSION
+
+    make regular-asm
+    make
+    make test
+
+    mv build/luvi ${_build}
+
+    if [ ! -z "$GITHUB_ENV" ]; then
+        echo "luvi_info=$luvi_version" >>$GITHUB_ENV
+    fi
+    echo "Luvi $luvi_version" >>${_build}/INFO
+}
+
+__lit() {
+    cd lit.git
+
+    git fetch --tags --prune --progress --no-recurse-submodules --depth=1 origin master
+
+    latest_tagged=$(git rev-list --tags --max-count=1)
+    lit_version=$(git describe --tags "$latest_tagged")
+    if [ "${latest_tagged}" != "$(git rev-parse HEAD)" ]; then
+        lit_version="${lit_version}-dev+$(git rev-parse --short HEAD)"
+    fi
+
+    ${_build}/luvi . -- make . ${_build}/lit ${_build}/luvi
+
+    if [ ! -z "$GITHUB_ENV" ]; then
+        echo "lit_info=$lit_version" >>$GITHUB_ENV
+    fi
+    echo "Lit $lit_version" >>${_build}/INFO
+}
+
+__luvit() {
+    cd luvit.git
+
+    git fetch --tags --prune --progress --no-recurse-submodules --depth=1 origin master
+
+    latest_tagged=$(git rev-list --tags --max-count=1)
+    luvit_version=$(git describe --tags "$latest_tagged")
+    if [ "${latest_tagged}" != "$(git rev-parse HEAD)" ]; then
+        luvit_version="${luvit_version}-dev+$(git rev-parse --short HEAD)"
+    fi
+
+    ${_build}/lit make . ${_build}/luvit ${_build}/luvi
+
+    if [ ! -z "$GITHUB_ENV" ]; then
+        echo "luvit_info=$luvit_version" >>$GITHUB_ENV
+    fi
+    echo "Luvit $luvit_version" >>${_build}/INFO
+}
+
+__package() {
+    cd build
+
+    artifact="luvit-bin-$(uname -s)-$(uname -m).tar.xz"
+    echo "Packaged: $(date '+%Y-%m-%d %H:%M:%S %:z')" >>${_build}/INFO
+    echo "artifact=$artifact" >>$GITHUB_ENV
+
+    tar cf - * | xz -z - >$artifact
+}
+
+case "$1" in
+clone) __clone ;;
+luvi) __luvi ;;
+lit) __lit ;;
+luvit) __luvit ;;
+package) __package ;;
+esac
