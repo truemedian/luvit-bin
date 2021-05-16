@@ -13,36 +13,36 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Clone
+        working-directory: src
         run: |
           chmod u+x build.sh
 
           ./build.sh clone
 
       - name: Build Luvi
+        working-directory: src
         run: |
           ./build.sh luvi
 
       - name: Build Lit
+        working-directory: src
         run: |
           ./build.sh lit
 
       - name: Build Luvit
+        working-directory: src
         run: |
           ./build.sh luvit
 
       - name: Package
+        working-directory: src
         run: |
           ./build.sh package
 
       - uses: actions/upload-artifact@v2
         with:
           name: ${{ env.artifact }}
-          path: build/${{ env.artifact }}
-
-    outputs:
-      luvit_info: ${{ env.luvit_info }}
-      luvi_info: ${{ env.luvi_info }}
-      lit_info: ${{ env.lit_info }}
+          path: src/build/${{ env.artifact }}
 
   darwin:
     runs-on: macos-latest
@@ -51,31 +51,36 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Clone
+        working-directory: src
         run: |
           chmod u+x build.sh
 
           ./build.sh clone
 
       - name: Build Luvi
+        working-directory: src
         run: |
           ./build.sh luvi
 
       - name: Build Lit
+        working-directory: src
         run: |
           ./build.sh lit
 
       - name: Build Luvit
+        working-directory: src
         run: |
           ./build.sh luvit
 
       - name: Package
+        working-directory: src
         run: |
           ./build.sh package
 
       - uses: actions/upload-artifact@v2
         with:
           name: ${{ env.artifact }}
-          path: build/${{ env.artifact }}
+          path: src/build/${{ env.artifact }}
 
   windows:
     runs-on: windows-latest
@@ -108,29 +113,34 @@ jobs:
           Write-Output "C:\Program Files\NASM" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
       - name: Clone
+        working-directory: src
         run: |
           ./build.ps1 clone
 
       - name: Build Luvi
+        working-directory: src
         run: |
           ./build.ps1 luvi
 
       - name: Build Lit
+        working-directory: src
         run: |
           ./build.ps1 lit
 
       - name: Build Luvit
+        working-directory: src
         run: |
           ./build.ps1 luvit
 
       - name: Package
+        working-directory: src
         run: |
           ./build.ps1 package
 
       - uses: actions/upload-artifact@v2
         with:
           name: ${{ env.artifact }}
-          path: build/${{ env.artifact }}
+          path: src/build/${{ env.artifact }}
 
   linux-arm:
     runs-on: ubuntu-latest
@@ -143,6 +153,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Clone
+        working-directory: src
         run: |
           chmod u+x build.sh
 
@@ -162,6 +173,8 @@ jobs:
             apt-get update -q -y
             apt-get install -q -y build-essential perl git cmake
           run: |
+            cd src
+
             ./build.sh luvi
             ./build.sh lit
             ./build.sh luvit
@@ -170,35 +183,14 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: ${{ env.artifact }}
-          path: build/${{ env.artifact }}
+          path: src/build/${{ env.artifact }}
 
   release:
-    needs:
-      [
-        linux,
-        darwin,
-        windows,
-        linux-arm,
-      ]
+    needs: [linux, darwin, windows, linux-arm]
     runs-on: ubuntu-latest
-    env:
-      luvit_info: ${{ needs.linux.outputs.luvit_info }}
-      luvi_info: ${{ needs.linux.outputs.luvi_info }}
-      lit_info: ${{ needs.linux.outputs.lit_info }}
     steps:
       - name: Checkout truemedian/luvit-bin
         uses: actions/checkout@v2
-
-      - name: Setup Go
-        uses: actions/setup-go@v2
-        with:
-          go-version: "^1.15.0"
-
-      - name: Setup GHR
-        run: |
-          go get -u github.com/tcnksm/ghr
-
-          echo "VERSION=$(date '+%Y-%m-%d')" >>$GITHUB_ENV
 
       - name: Download Artifacts
         uses: actions/download-artifact@v2
@@ -210,12 +202,19 @@ jobs:
           mkdir -p releases/
           cp build/**/* releases/
 
+      - name: Generate Release Information
+        working-directory: src
+        run: |
+          chmod u+x release.sh
+
+          ./release.sh
+
       - name: Upload Release
+        uses: softprops/action-gh-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          ghr \
-            -replace \
-            -n "Luvit ${{ env.VERSION }}" \
-            -b "Luvit $luvit_info<br>Luvi $luvi_info<br>Lit $lit_info<br><br>Weekly Release" \
-            "${{ env.VERSION }}" releases/
+        with:
+          body_path: src/RELEASE
+          files: releases/*
+          name: Luvit ${{ env.tag }}
+          tag_name: ${{ env.tag }}

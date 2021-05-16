@@ -32,9 +32,6 @@ __luvi() {
 
     mv build/luvi ${_build}
 
-    if [ ! -z "$GITHUB_ENV" ]; then
-        echo "luvi_info=$luvi_version" >>$GITHUB_ENV
-    fi
     echo "Luvi $luvi_version" >>${_build}/INFO
 }
 
@@ -51,9 +48,6 @@ __lit() {
 
     ${_build}/luvi . -- make . ${_build}/lit ${_build}/luvi
 
-    if [ ! -z "$GITHUB_ENV" ]; then
-        echo "lit_info=$lit_version" >>$GITHUB_ENV
-    fi
     echo "Lit $lit_version" >>${_build}/INFO
 }
 
@@ -70,9 +64,6 @@ __luvit() {
 
     ${_build}/lit make . ${_build}/luvit ${_build}/luvi
 
-    if [ ! -z "$GITHUB_ENV" ]; then
-        echo "luvit_info=$luvit_version" >>$GITHUB_ENV
-    fi
     echo "Luvit $luvit_version" >>${_build}/INFO
 }
 
