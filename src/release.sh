@@ -10,6 +10,17 @@ get_changelog() {
     popd >/dev/null
 }
 
+get_latest_tag() {
+    pushd "$1.git" >/dev/null
+
+    latest_tagged=$(git rev-list --tags --max-count=1)
+    version=$(git describe --tags "$latest_tagged")
+
+    popd >/dev/null
+
+    echo $version
+}
+
 get_version() {
     pushd "$1.git" >/dev/null
 
@@ -28,6 +39,10 @@ git clone https://github.com/luvit/luvit luvit.git
 git clone https://github.com/luvit/luvi luvi.git
 git clone https://github.com/luvit/lit lit.git
 
+luvit_latest=$(get_latest_tag luvit)
+luvi_latest=$(get_latest_tag luvi)
+lit_latest=$(get_latest_tag lit)
+
 luvit_version=$(get_version luvit)
 luvi_version=$(get_version luvi)
 lit_version=$(get_version lit)
@@ -41,24 +56,36 @@ echo "Lit $lit_version" >>RELEASE
 echo "" >>RELEASE
 echo "# Changelogs" >>RELEASE
 echo "" >>RELEASE
-echo "## Luvit" >>RELEASE
+echo "## Luvit commits since $(get_latest_tag luvit)" >>RELEASE
 echo "" >>RELEASE
 
-get_changelog luvit >>RELEASE
-
-echo "" >>RELEASE
-echo "" >>RELEASE
-echo "## Luvi" >>RELEASE
-echo "" >>RELEASE
-
-get_changelog luvi >>RELEASE
+if [ "$luvit_latest" != "$luvit_version" ]; then
+    get_changelog luvit >>RELEASE
+else
+    echo -n "None" >>RELEASE
+fi
 
 echo "" >>RELEASE
 echo "" >>RELEASE
-echo "## Lit" >>RELEASE
+echo "## Luvi commits since $(get_latest_tag luvi)" >>RELEASE
 echo "" >>RELEASE
 
-get_changelog lit >>RELEASE
+if [ "$luvi_latest" != "$luvi_version" ]; then
+    get_changelog luvi >>RELEASE
+else
+    echo -n "None" >>RELEASE
+fi
+
+echo "" >>RELEASE
+echo "" >>RELEASE
+echo "## Lit commits since $(get_latest_tag lit)" >>RELEASE
+echo "" >>RELEASE
+
+if [ "$lit_latest" != "$lit_version" ]; then
+    get_changelog lit >>RELEASE
+else
+    echo -n "None" >>RELEASE
+fi
 
 echo "" >>RELEASE
 
