@@ -42,7 +42,7 @@ been designed to be easy to read.
 You can either download and run it yourself, or run
 
 ```shell
-curl -L https://github.com/truemedian/luvit-bin/raw/master/install.sh | sh
+curl -L https://github.com/truemedian/luvit-bin/raw/main/install.sh | sh
 ```
 
 To download and run the script automatically.
