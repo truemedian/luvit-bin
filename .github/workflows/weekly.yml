@@ -16,6 +16,7 @@ jobs:
         working-directory: src
         run: |
           chmod u+x build.sh
+          chmod u+x headers.sh
 
           ./build.sh clone
 
@@ -23,6 +24,11 @@ jobs:
         working-directory: src
         run: |
           ./build.sh luvi
+
+      - name: Generate Headers
+        working-directory: src
+        run: |
+          ./headers.sh
 
       - name: Build Lit
         working-directory: src
@@ -43,6 +49,11 @@ jobs:
         with:
           name: ${{ env.artifact }}
           path: src/build/${{ env.artifact }}
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: headers.tar.xz
+          path: src/headers/headers.tar.xz
 
   darwin:
     runs-on: macos-latest

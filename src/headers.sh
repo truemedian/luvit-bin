@@ -3,11 +3,12 @@ set -eu
 
 [ -d luvi.git ] || exit 1
 
+_hdrs="$PWD/headers"
+
 cd luvi.git
 
 [ -d build ] || exit 1
 
-_hdrs="$PWD/headers"
 mkdir -p $_hdrs
 
 # Luajit
