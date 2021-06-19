@@ -52,8 +52,8 @@ jobs:
 
       - uses: actions/upload-artifact@v2
         with:
-          name: headers.tar.xz
-          path: src/headers/headers.tar.xz
+          name: headers.tar.gz
+          path: src/headers/headers.tar.gz
 
   darwin:
     runs-on: macos-latest

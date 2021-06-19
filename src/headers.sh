@@ -43,4 +43,4 @@ cp build/openssl/src/openssl/include/openssl/*.h $_hdrs/openssl
 
 cd $_hdrs
 
-tar cf - * | xz -z - >headers.tar.xz
+tar czf headers.tar.gz *

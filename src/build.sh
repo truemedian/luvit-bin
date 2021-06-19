@@ -70,11 +70,11 @@ __luvit() {
 __package() {
     cd build
 
-    artifact="luvit-bin-$(uname -s)-$(uname -m).tar.xz"
+    artifact="luvit-bin-$(uname -s)-$(uname -m).tar.gz"
     echo "Packaged: $(date '+%Y-%m-%d %H:%M:%S %:z')" >>${_build}/INFO
     echo "artifact=$artifact" >>$GITHUB_ENV
 
-    tar cf - * | xz -z - >$artifact
+    tar czf $artifact *
 }
 
 case "$1" in
