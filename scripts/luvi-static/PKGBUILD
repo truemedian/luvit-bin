@@ -1,0 +1,57 @@
+# Maintainer: Truemedian <truemedian at gmail dot com>
+
+pkgname='luvi-static-git'
+pkgver=v2.11.0.r29.afea1cd
+pkgrel=1
+pkgdesc="A project in-between luv and luvit (statically linked)"
+arch=('i686' 'x86_64' 'arm' 'armv6h' 'armv7h')
+url="https://github.com/luvit/luvi"
+license=('Apache')
+makedepends=('cmake' 'git' 'perl')
+provides=('luvi')
+source=("git+$url.git")
+sha256sums=('SKIP')
+
+pkgver() {
+	cd "$srcdir/luvi"
+
+	printf "%s" "$(git describe --long | sed 's/\([^-]*-\)g/r\1/;s/-/./g')"
+}
+
+prepare() {
+	cd "$srcdir/luvi"
+
+	git submodule init
+	git config --remove-section submodule.deps/lua-zlib || true
+	git config --remove-section submodule.deps/zlib || true
+	git submodule update
+
+	cd "$srcdir/luvi/deps/luv"
+
+	git submodule init
+	git config --remove-section submodule.lua || true
+	git submodule update
+
+	cd "$srcdir/luvi/deps/lua-openssl"
+
+	git submodule update --init
+}
+
+build() {
+	cd "$srcdir/luvi"
+
+	make WITHOUT_AMALG=1 regular
+	make
+}
+
+check() {
+	cd "$srcdir/luvi"
+	make test
+}
+
+package() {
+	cd "$srcdir/luvi"
+
+	mkdir -p "$pkgdir/usr/bin"
+	make LUVI_PREFIX="$pkgdir/usr" install
+}

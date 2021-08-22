@@ -3,9 +3,9 @@
 
 # Executables
 *.exe
-lit
-luvi
-luvit
+lit$
+luvi$
+luvit$
 
 # Installation log
 install.log
