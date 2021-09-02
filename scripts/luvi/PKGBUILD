@@ -1,7 +1,7 @@
 # Maintainer: Truemedian <truemedian at gmail dot com>
 
 pkgname='luvi-git'
-pkgver=v2.11.0.r29.afea1cd
+pkgver=2.11.0.r29.afea1cd
 pkgrel=1
 pkgdesc="A project in-between luv and luvit"
 arch=('i686' 'x86_64' 'arm' 'armv6h' 'armv7h')
@@ -22,7 +22,7 @@ sha256sums=(
 pkgver() {
 	cd "$srcdir/luvi"
 
-	printf "%s" "$(git describe --long | sed 's/\([^-]*-\)g/r\1/;s/-/./g')"
+	printf "%s" "$(git describe --long | sed 's/\([^-]*-\)g/r\1/;s/-/./g;s/^v//')"
 }
 
 prepare() {
