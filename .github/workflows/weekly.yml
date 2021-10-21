@@ -158,7 +158,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        arch: [armv6, armv7]
+        arch: [armv6, armv7, aarch64]
     steps:
       - name: Checkout truemedian/luvit-bin
         uses: actions/checkout@v2
