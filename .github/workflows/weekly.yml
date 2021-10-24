@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Clone
-        working-directory: src
+        working-directory: ci
         run: |
           chmod u+x build.sh
           chmod u+x headers.sh
@@ -21,39 +21,39 @@ jobs:
           ./build.sh clone
 
       - name: Build Luvi
-        working-directory: src
+        working-directory: ci
         run: |
           ./build.sh luvi
 
       - name: Generate Headers
-        working-directory: src
+        working-directory: ci
         run: |
           ./headers.sh
 
       - name: Build Lit
-        working-directory: src
+        working-directory: ci
         run: |
           ./build.sh lit
 
       - name: Build Luvit
-        working-directory: src
+        working-directory: ci
         run: |
           ./build.sh luvit
 
       - name: Package
-        working-directory: src
+        working-directory: ci
         run: |
           ./build.sh package
 
       - uses: actions/upload-artifact@v2
         with:
           name: ${{ env.artifact }}
-          path: src/build/${{ env.artifact }}
+          path: ci/build/${{ env.artifact }}
 
       - uses: actions/upload-artifact@v2
         with:
           name: headers.tar.gz
-          path: src/headers/headers.tar.gz
+          path: ci/headers/headers.tar.gz
 
   darwin:
     runs-on: macos-latest
@@ -62,36 +62,36 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Clone
-        working-directory: src
+        working-directory: ci
         run: |
           chmod u+x build.sh
 
           ./build.sh clone
 
       - name: Build Luvi
-        working-directory: src
+        working-directory: ci
         run: |
           ./build.sh luvi
 
       - name: Build Lit
-        working-directory: src
+        working-directory: ci
         run: |
           ./build.sh lit
 
       - name: Build Luvit
-        working-directory: src
+        working-directory: ci
         run: |
           ./build.sh luvit
 
       - name: Package
-        working-directory: src
+        working-directory: ci
         run: |
           ./build.sh package
 
       - uses: actions/upload-artifact@v2
         with:
           name: ${{ env.artifact }}
-          path: src/build/${{ env.artifact }}
+          path: ci/build/${{ env.artifact }}
 
   windows:
     runs-on: windows-latest
@@ -124,34 +124,34 @@ jobs:
           Write-Output "C:\Program Files\NASM" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
       - name: Clone
-        working-directory: src
+        working-directory: ci
         run: |
           ./build.ps1 clone
 
       - name: Build Luvi
-        working-directory: src
+        working-directory: ci
         run: |
           ./build.ps1 luvi
 
       - name: Build Lit
-        working-directory: src
+        working-directory: ci
         run: |
           ./build.ps1 lit
 
       - name: Build Luvit
-        working-directory: src
+        working-directory: ci
         run: |
           ./build.ps1 luvit
 
       - name: Package
-        working-directory: src
+        working-directory: ci
         run: |
           ./build.ps1 package
 
       - uses: actions/upload-artifact@v2
         with:
           name: ${{ env.artifact }}
-          path: src/build/${{ env.artifact }}
+          path: ci/build/${{ env.artifact }}
 
   linux-arm:
     runs-on: ubuntu-latest
@@ -164,7 +164,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Clone
-        working-directory: src
+        working-directory: ci
         run: |
           chmod u+x build.sh
 
@@ -184,7 +184,7 @@ jobs:
             apt-get update -q -y
             apt-get install -q -y build-essential perl git cmake
           run: |
-            cd src
+            cd ci
 
             ./build.sh luvi
             ./build.sh lit
@@ -194,7 +194,7 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: ${{ env.artifact }}
-          path: src/build/${{ env.artifact }}
+          path: ci/build/${{ env.artifact }}
 
   release:
     needs: [linux, darwin, windows, linux-arm]
@@ -214,7 +214,7 @@ jobs:
           cp build/**/* releases/
 
       - name: Generate Release Information
-        working-directory: src
+        working-directory: ci
         run: |
           chmod u+x release.sh
 
@@ -225,7 +225,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          body_path: src/RELEASE
+          body_path: ci/RELEASE
           files: releases/*
           name: Luvit ${{ env.tag }}
           tag_name: ${{ env.tag }}
