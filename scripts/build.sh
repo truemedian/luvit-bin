@@ -4,10 +4,10 @@ set -u
 DEFAULT_CMAKE_FLAGS="-DCMAKE_BUILD_TYPE=Release -DWithSharedLibluv=OFF -DWithOpenSSL=ON -DWithSharedOpenSSL=OFF -DWithOpenSSLASM=ON -DWithPCRE=ON -DWithLPEG=ON -DWithSharedPCRE=OFF"
 CMAKE_FLAGS=${CMAKE_FLAGS-$DEFAULT_CMAKE_FLAGS}
 
-DEFAULT_INSTALL_PREFIX="${HOME}/.local/bin"
+DEFAULT_INSTALL_PREFIX="${PWD}"
 INSTALL_PREFIX=${PREFIX-$DEFAULT_INSTALL_PREFIX}
 
-build_root=$(pwd)
+build_root=${PWD}
 
 c_reset='\033[0m'
 c_black='\033[1;30m'
@@ -185,8 +185,6 @@ fi
 
 log_info "Setting Up Installation Location (${INSTALL_PREFIX})"
 mkdir -p "${INSTALL_PREFIX}"
-
-INSTALL_PREFIX=$(realdir "${INSTALL_PREFIX}")
 
 luvi_command="${INSTALL_PREFIX}/luvi"
 lit_command="${INSTALL_PREFIX}/lit"
