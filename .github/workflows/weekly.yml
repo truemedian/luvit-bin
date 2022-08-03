@@ -94,7 +94,7 @@ jobs:
           path: ci/build/${{ env.artifact }}
 
   windows:
-    runs-on: windows-latest
+    runs-on: windows-2019
     strategy:
       fail-fast: false
       matrix:
@@ -158,7 +158,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        arch: [armv6, armv7, aarch64]
+        include:
+          - arch: armv6
+            distro: jessie
+          - arch: armv7
+            distro: jessie
+          - arch: aarch64
+            distro: stretch
     steps:
       - name: Checkout truemedian/luvit-bin
         uses: actions/checkout@v2
@@ -170,16 +176,13 @@ jobs:
 
           ./build.sh clone
 
-      - uses: uraimo/run-on-arch-action@v2.0.7
+      - uses: uraimo/run-on-arch-action@v2
         name: Build
         with:
-          distro: stretch
+          distro: ${{ matrix.distro }}
           arch: ${{ matrix.arch }}
 
           shell: /bin/bash
-          dockerRunArgs: |
-            --env GITHUB_ENV
-            --volume '"${GITHUB_ENV}:${GITHUB_ENV}"'
           install: |
             apt-get update -q -y
             apt-get install -q -y build-essential perl git cmake
