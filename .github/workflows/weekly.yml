@@ -158,13 +158,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - arch: armv6
-            distro: jessie
-          - arch: armv7
-            distro: jessie
-          - arch: aarch64
-            distro: stretch
+        arch: [armv6, armv7, aarch64]
     steps:
       - name: Checkout truemedian/luvit-bin
         uses: actions/checkout@v2
@@ -179,7 +173,7 @@ jobs:
       - uses: uraimo/run-on-arch-action@v2
         name: Build
         with:
-          distro: ${{ matrix.distro }}
+          distro: stretch
           arch: ${{ matrix.arch }}
 
           shell: /bin/bash
