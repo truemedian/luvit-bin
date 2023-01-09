@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout truemedian/luvit-bin
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Clone
         working-directory: ci
@@ -45,12 +45,12 @@ jobs:
         run: |
           ./build.sh package
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: ${{ env.artifact }}
           path: ci/build/${{ env.artifact }}
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: headers.tar.gz
           path: ci/headers/headers.tar.gz
@@ -59,7 +59,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Checkout truemedian/luvit-bin
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Clone
         working-directory: ci
@@ -88,7 +88,7 @@ jobs:
         run: |
           ./build.sh package
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: ${{ env.artifact }}
           path: ci/build/${{ env.artifact }}
@@ -103,10 +103,10 @@ jobs:
       BUILD_ARCH: ${{ matrix.arch }}
     steps:
       - name: Checkout truemedian/luvit-bin
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Cache Dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         id: cache
         with:
           path: C:\Program Files\NASM
@@ -148,7 +148,7 @@ jobs:
         run: |
           ./build.ps1 package
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: ${{ env.artifact }}
           path: ci/build/${{ env.artifact }}
@@ -161,7 +161,7 @@ jobs:
         arch: [armv6, armv7, aarch64]
     steps:
       - name: Checkout truemedian/luvit-bin
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Clone
         working-directory: ci
@@ -186,9 +186,14 @@ jobs:
             ./build.sh luvi
             ./build.sh lit
             ./build.sh luvit
-            ./build.sh package
+            ./build.sh package_docker_inner
 
-      - uses: actions/upload-artifact@v2
+      - name: Package
+        working-directory: ci
+        run: |
+          ./build.sh package_docker_outer
+
+      - uses: actions/upload-artifact@v3
         with:
           name: ${{ env.artifact }}
           path: ci/build/${{ env.artifact }}
@@ -198,10 +203,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout truemedian/luvit-bin
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Download Artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           path: build
 

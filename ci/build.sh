@@ -69,10 +69,31 @@ __package() {
     tar czf $artifact *
 }
 
+# uraimo/run-on-arch-action has an issue where we cannot write to $GITHUB_ENV, so we need to pull that code out of the container
+__package_docker_inner() {
+    cd build
+
+    artifact="luvit-bin-$(uname -s)-$(uname -m).tar.gz"
+
+    tar czf $artifact *
+
+    echo "$artifact" > "artifact.name"
+}
+
+__package_docker_outer() {
+    cd build
+
+    artifact=$(cat "artifact.name")
+
+    echo "artifact=$artifact" >>$GITHUB_ENV
+}
+
 case "$1" in
 clone) __clone ;;
 luvi) __luvi ;;
 lit) __lit ;;
 luvit) __luvit ;;
 package) __package ;;
+package_docker_inner) __package_docker_inner ;;
+package_docker_outer) __package_docker_outer ;;
 esac
