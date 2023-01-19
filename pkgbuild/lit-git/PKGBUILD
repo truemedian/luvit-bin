@@ -1,0 +1,41 @@
+# Maintainer: Truemedian <truemedian at gmail dot com>
+
+_pkgname='lit'
+pkgname="$_pkgname-git"
+pkgver=3.8.4.r32.bef2ae1
+pkgrel=1
+arch=('i686' 'x86_64' 'arm' 'armv6h' 'armv7h')
+url="https://github.com/luvit/lit"
+license=('Apache')
+provides=("$_pkgname")
+conflicts=("$_pkgname")
+depends=('luvi')
+source=("git+$url.git")
+sha256sums=('SKIP')
+options=(!strip)
+
+pkgver() {
+    cd "$_pkgname"
+
+    printf "%s" "$(git describe --long | sed 's/\([^-]*-\)g/r\1/;s/-/./g')"
+}
+
+prepare() {
+    cd "$_pkgname"
+
+    git submodule update --init
+}
+
+build() {
+    cd "$_pkgname"
+
+    luvi . -- make . lit "$(which luvi)"
+}
+
+# Note: `lit` is taken by llvm, so we use `lulit` instead.
+package() {
+    cd "$_pkgname"
+
+    mkdir -p "$pkgdir/usr/bin"
+    install -p lit "$pkgdir/usr/bin/lulit"
+}

@@ -1,0 +1,311 @@
+9a24497256d00ad2a33d9052ce73f46f7a4300d9	not-for-merge	branch 'add_changelog_for_2_5_0' of https://github.com/luvit/luvi
+dae7928c16192a2522179f041c4205328c7cc569	not-for-merge	branch 'bump/luvi_for_luajit_2' of https://github.com/luvit/luvi
+38ee639978949af41e517f560cb978dbcaebdda7	not-for-merge	branch 'bump/openssl_1_0_2e' of https://github.com/luvit/luvi
+9d2810ff27eee9f2ce88f08c60a62b28678ae388	not-for-merge	branch 'bump/openssl_1_0_2g' of https://github.com/luvit/luvi
+128443243e16a4685f094bb8e14610577d0e61ba	not-for-merge	branch 'clean-bundle' of https://github.com/luvit/luvi
+87a990f643e0be07e8df0964bd74b04d2aa16a87	not-for-merge	branch 'creationix/update-luv' of https://github.com/luvit/luvi
+e9a10d99020226eea44e73b9162e8e9f7bdc816d	not-for-merge	branch 'docker-build' of https://github.com/luvit/luvi
+a4f4c5c3b5b217695cb38df5963aefa092986f6d	not-for-merge	branch 'fixcrc32' of https://github.com/luvit/luvi
+554d21a3e022ed3ce33d2ab29c55492c5330a879	not-for-merge	branch 'fixes/add_holy_build_support' of https://github.com/luvit/luvi
+d3d6871128c29949565e8c2f2626a1dce30653f1	not-for-merge	branch 'fixes/add_uv_version' of https://github.com/luvit/luvi
+8457656fb466fc52d03f9dc9173cc41edf6a8456	not-for-merge	branch 'fixes/appveyor_2015' of https://github.com/luvit/luvi
+f7a1a49643088ae8bb1f703b440b9b980ac00473	not-for-merge	branch 'fixes/bump_openssl_1_0_2g' of https://github.com/luvit/luvi
+535cf6e0df7787544b1b3dbe79f1afd0f9403199	not-for-merge	branch 'fixes/bump_to_luajit21' of https://github.com/luvit/luvi
+e7c39ced40bde4fc4da9a9b437f81254b838ae54	not-for-merge	branch 'fixes/luvi_1_8_0_4' of https://github.com/luvit/luvi
+6a97c0c346c0e0cbee211aa75630077a240008ef	not-for-merge	branch 'fixes/openssl_1.0.2h' of https://github.com/luvit/luvi
+9ffeacfe951120b4c643cab085b5f8690d36d1bb	not-for-merge	branch 'fixes/openssl_686' of https://github.com/luvit/luvi
+6797900a2eb80bd89d01430e2be1457f50a7e07c	not-for-merge	branch 'fixes/publish' of https://github.com/luvit/luvi
+3ac0bf6d5855bce98f932af5369ab6cb42f2b273	not-for-merge	branch 'fixes/thread_detection' of https://github.com/luvit/luvi
+a55f7108a333cbb9a30169d54dfdac72c6ef4904	not-for-merge	branch 'fixes/upgrade_to_new_travis' of https://github.com/luvit/luvi
+111df16580abb2ff3719cfa58e9d34c345e3669e	not-for-merge	branch 'fixes/windows_686' of https://github.com/luvit/luvi
+c2cfb7b2571d636b4f3f6ba8808424bd15d88b3c	not-for-merge	branch 'fixes/winsvc_version' of https://github.com/luvit/luvi
+ef267da7b59927ea713fbb6484a33e899a8b6eae	not-for-merge	branch 'joerg-krause/update-lua-openssl' of https://github.com/luvit/luvi
+b3ea2660a3149df1df2da3bcd15cd36f7bf84aac	not-for-merge	branch 'luvly' of https://github.com/luvit/luvi
+72b7488d2ba6a81156a779d2f16d8cbf52befd08	not-for-merge	branch 'master' of https://github.com/luvit/luvi
+53247a39b4b8cdd702f54478647f68e8300d553e	not-for-merge	branch 'miniz-fix' of https://github.com/luvit/luvi
+5085659d652244c58d173704f63001d63f99bfa1	not-for-merge	branch 'pcre2' of https://github.com/luvit/luvi
+3eaafcb79e998d160e6cd946c689db361a628f1d	not-for-merge	branch 'release' of https://github.com/luvit/luvi
+2c0929d6d722d986ad6989c76b1b58e17b50aefe	not-for-merge	branch 'snapshot' of https://github.com/luvit/luvi
+f30acafeb4cc7652b6a9f27139952d402077d49e	not-for-merge	branch 'static-build' of https://github.com/luvit/luvi
+9e050a428e368ccbccfc1ac31ad49757d3dceb67	not-for-merge	branch 'update-luv-luajit-2.1' of https://github.com/luvit/luvi
+1c6567b6615d07ffca3c48056e0537615ebf3185	not-for-merge	branch 'utf8-fix' of https://github.com/luvit/luvi
+7b40cb3a05d1b10ce4e63515570fb396772d781a	not-for-merge	'refs/pull/10/head' of https://github.com/luvit/luvi
+83929d992565e0cf99c22dd773b8fb6a050fa48a	not-for-merge	'refs/pull/101/head' of https://github.com/luvit/luvi
+21798fcdf7aeb029a13b12bade2b4f08c7174708	not-for-merge	'refs/pull/103/head' of https://github.com/luvit/luvi
+d2b59f3b8de84687afd91a5007e4eaa124ffd854	not-for-merge	'refs/pull/104/head' of https://github.com/luvit/luvi
+ac71650bd7e740e4d74088e679f941f4f0327ff5	not-for-merge	'refs/pull/104/merge' of https://github.com/luvit/luvi
+ad6e7dca6250270d42addc9c691c6fb9f9794d8b	not-for-merge	'refs/pull/105/head' of https://github.com/luvit/luvi
+6797900a2eb80bd89d01430e2be1457f50a7e07c	not-for-merge	'refs/pull/106/head' of https://github.com/luvit/luvi
+a55f7108a333cbb9a30169d54dfdac72c6ef4904	not-for-merge	'refs/pull/107/head' of https://github.com/luvit/luvi
+535cf6e0df7787544b1b3dbe79f1afd0f9403199	not-for-merge	'refs/pull/108/head' of https://github.com/luvit/luvi
+6c60e955c172980eb39f011f1fa3b0853224fe7c	not-for-merge	'refs/pull/108/merge' of https://github.com/luvit/luvi
+d3d6871128c29949565e8c2f2626a1dce30653f1	not-for-merge	'refs/pull/110/head' of https://github.com/luvit/luvi
+5085659d652244c58d173704f63001d63f99bfa1	not-for-merge	'refs/pull/111/head' of https://github.com/luvit/luvi
+b1e3c60d73648c839634cc7b11ad3e89669ea287	not-for-merge	'refs/pull/115/head' of https://github.com/luvit/luvi
+a4f4c5c3b5b217695cb38df5963aefa092986f6d	not-for-merge	'refs/pull/116/head' of https://github.com/luvit/luvi
+93838c57d2ea5121f789202f888ca16a84dfa99e	not-for-merge	'refs/pull/117/head' of https://github.com/luvit/luvi
+517f10cd5712953fc2d10f5f5c87d9df41fc6d33	not-for-merge	'refs/pull/118/head' of https://github.com/luvit/luvi
+02800b3b9aaa95e92192ce6fcf9b44632d298f9c	not-for-merge	'refs/pull/119/head' of https://github.com/luvit/luvi
+9a050472fceae7dc26769f7bcfaab935b868f8ce	not-for-merge	'refs/pull/119/merge' of https://github.com/luvit/luvi
+128443243e16a4685f094bb8e14610577d0e61ba	not-for-merge	'refs/pull/120/head' of https://github.com/luvit/luvi
+3ac0bf6d5855bce98f932af5369ab6cb42f2b273	not-for-merge	'refs/pull/121/head' of https://github.com/luvit/luvi
+0be7acc82ddffd8012e458dbb1d09a50e151116d	not-for-merge	'refs/pull/122/head' of https://github.com/luvit/luvi
+a1dd2f15f7d6ea05e22a0cf7b44355694e8d33af	not-for-merge	'refs/pull/124/head' of https://github.com/luvit/luvi
+5816e90a9098ea346948c14f5d12666405e965ce	not-for-merge	'refs/pull/125/head' of https://github.com/luvit/luvi
+554d21a3e022ed3ce33d2ab29c55492c5330a879	not-for-merge	'refs/pull/126/head' of https://github.com/luvit/luvi
+4fb1be885b83398292579015cb38b25a2256cefe	not-for-merge	'refs/pull/127/head' of https://github.com/luvit/luvi
+ef267da7b59927ea713fbb6484a33e899a8b6eae	not-for-merge	'refs/pull/128/head' of https://github.com/luvit/luvi
+382b6b0e7552bd00ad0558ae8fcab309901d03b9	not-for-merge	'refs/pull/129/head' of https://github.com/luvit/luvi
+aeda3c7def004643171f8ea3f3ca42a73406fadf	not-for-merge	'refs/pull/130/head' of https://github.com/luvit/luvi
+38ee639978949af41e517f560cb978dbcaebdda7	not-for-merge	'refs/pull/131/head' of https://github.com/luvit/luvi
+9a24497256d00ad2a33d9052ce73f46f7a4300d9	not-for-merge	'refs/pull/132/head' of https://github.com/luvit/luvi
+c2cfb7b2571d636b4f3f6ba8808424bd15d88b3c	not-for-merge	'refs/pull/135/head' of https://github.com/luvit/luvi
+e08b6ecfc6c31ce07adffb69a07ccaf4f2283c2b	not-for-merge	'refs/pull/137/head' of https://github.com/luvit/luvi
+2d4ccfca3f49128767b25cb4aefcd3a54953db7e	not-for-merge	'refs/pull/137/merge' of https://github.com/luvit/luvi
+dae7928c16192a2522179f041c4205328c7cc569	not-for-merge	'refs/pull/138/head' of https://github.com/luvit/luvi
+e7c39ced40bde4fc4da9a9b437f81254b838ae54	not-for-merge	'refs/pull/139/head' of https://github.com/luvit/luvi
+d462a6c166fc6d94d61c8c0df84516d2e3b30001	not-for-merge	'refs/pull/141/head' of https://github.com/luvit/luvi
+9d2810ff27eee9f2ce88f08c60a62b28678ae388	not-for-merge	'refs/pull/143/head' of https://github.com/luvit/luvi
+8457656fb466fc52d03f9dc9173cc41edf6a8456	not-for-merge	'refs/pull/145/head' of https://github.com/luvit/luvi
+35c3961d10d3f9e3752102ea8e8bb8c187b32241	not-for-merge	'refs/pull/148/head' of https://github.com/luvit/luvi
+33b220ab58c738bf9de02ad26850403084ac2256	not-for-merge	'refs/pull/149/head' of https://github.com/luvit/luvi
+f3643dc89a55e27145726db0b56546d45984488d	not-for-merge	'refs/pull/15/head' of https://github.com/luvit/luvi
+f7a1a49643088ae8bb1f703b440b9b980ac00473	not-for-merge	'refs/pull/151/head' of https://github.com/luvit/luvi
+6a97c0c346c0e0cbee211aa75630077a240008ef	not-for-merge	'refs/pull/152/head' of https://github.com/luvit/luvi
+c4bcf5b6da8c22856531bb6d4c452a32554ed5e8	not-for-merge	'refs/pull/156/head' of https://github.com/luvit/luvi
+15e715e8897ffcc18a5d6471367cda6f22968d92	not-for-merge	'refs/pull/158/head' of https://github.com/luvit/luvi
+3797f6e927e429b6688f15baf7face2017790752	not-for-merge	'refs/pull/159/head' of https://github.com/luvit/luvi
+45db40fb60e752a4adff701ca4b1d58d536e5e9a	not-for-merge	'refs/pull/16/head' of https://github.com/luvit/luvi
+29a7acada329cf86ac81413255a7d17f345f4440	not-for-merge	'refs/pull/160/head' of https://github.com/luvit/luvi
+3c9257c05ccd01c8d5cabff7af73908e9324599c	not-for-merge	'refs/pull/164/head' of https://github.com/luvit/luvi
+ec0c05cb1950088aa722fbebc7c41272b722cfa2	not-for-merge	'refs/pull/165/head' of https://github.com/luvit/luvi
+f159fab8cd7da042880483251a38fa6a64320f7b	not-for-merge	'refs/pull/168/head' of https://github.com/luvit/luvi
+3a444d183d2fde91b6c2f3798b37881cdaa29691	not-for-merge	'refs/pull/169/head' of https://github.com/luvit/luvi
+d5241efd91443e635349dd3984397ca6f552de8f	not-for-merge	'refs/pull/170/head' of https://github.com/luvit/luvi
+aa4d92d364229703ec639a8781f66c8e696bb411	not-for-merge	'refs/pull/171/head' of https://github.com/luvit/luvi
+c3c5beefed6b992ea78495b08ed8a4ebad02bb24	not-for-merge	'refs/pull/172/head' of https://github.com/luvit/luvi
+c0460877ebaff1eb55aa1af7e65b9702b384a800	not-for-merge	'refs/pull/174/head' of https://github.com/luvit/luvi
+f98590eeee8b9220d2c0219919cdb85723ecdfa4	not-for-merge	'refs/pull/175/head' of https://github.com/luvit/luvi
+9b756e5194238a2e822c3f62dc9f4690cd4f55f0	not-for-merge	'refs/pull/176/head' of https://github.com/luvit/luvi
+10dfa3d02dbe00b1273a6020dc38aba4df8667d1	not-for-merge	'refs/pull/177/head' of https://github.com/luvit/luvi
+a981c704b960e52974ec5746a25b86de40b2cb67	not-for-merge	'refs/pull/179/head' of https://github.com/luvit/luvi
+e3786bd71b99b4e0ba87e30bb2300bc223007969	not-for-merge	'refs/pull/180/head' of https://github.com/luvit/luvi
+f7bdb7f5b9e29131e27d888aa7fb2060ad8e4d6d	not-for-merge	'refs/pull/181/head' of https://github.com/luvit/luvi
+48ee4770dd688a9b86a2b9ea111136ae5bb72b56	not-for-merge	'refs/pull/182/head' of https://github.com/luvit/luvi
+60b0a2cce4edb2be620bb16018d28ea0442249f9	not-for-merge	'refs/pull/182/merge' of https://github.com/luvit/luvi
+bde7f0b86372c3c8b1d732439324e8c450cd6576	not-for-merge	'refs/pull/183/head' of https://github.com/luvit/luvi
+eca34f9cd92a45eadc9de13533db23f6324dded0	not-for-merge	'refs/pull/185/head' of https://github.com/luvit/luvi
+ecd6ff4a3a5f01b1b804de7ed49447af23b9dc47	not-for-merge	'refs/pull/186/head' of https://github.com/luvit/luvi
+403eccc814fb352d3ebabf7a13a8d9453c15dccf	not-for-merge	'refs/pull/188/head' of https://github.com/luvit/luvi
+44c4be3d404868abe556035ef2aa85b37664860c	not-for-merge	'refs/pull/189/head' of https://github.com/luvit/luvi
+602f01bdf267514c1b4d097ec6a5d1ae50e612f6	not-for-merge	'refs/pull/190/head' of https://github.com/luvit/luvi
+3f4ecb27d02f034598e84171e36c5a78f53bbe12	not-for-merge	'refs/pull/191/head' of https://github.com/luvit/luvi
+920bebc1efe544d5339904329ad9e1582017d08a	not-for-merge	'refs/pull/192/head' of https://github.com/luvit/luvi
+47474db1d3aac687fe79771af19e18363a669932	not-for-merge	'refs/pull/193/head' of https://github.com/luvit/luvi
+cbd17874494b1fdbdc9ed16120c251d18677ca05	not-for-merge	'refs/pull/194/head' of https://github.com/luvit/luvi
+10453d46880e21b1ec3a91d4ccb8b60a0098fd07	not-for-merge	'refs/pull/196/head' of https://github.com/luvit/luvi
+50dee5a2063736ea7246e20c2a81094a2ebc0d91	not-for-merge	'refs/pull/198/head' of https://github.com/luvit/luvi
+71c701e1cd82f8bff65740bb26523db26511c842	not-for-merge	'refs/pull/199/head' of https://github.com/luvit/luvi
+c5f066ef05dc201995018848b88b5acf39233c8a	not-for-merge	'refs/pull/2/head' of https://github.com/luvit/luvi
+0cf15d27697c7fa0de1fe93f07bba1520f0d4584	not-for-merge	'refs/pull/20/head' of https://github.com/luvit/luvi
+20b398ae5587247600c012049773d9a0d719ae97	not-for-merge	'refs/pull/201/head' of https://github.com/luvit/luvi
+4c5f075c6334104be2c1d3a0b628d6e53490f3f2	not-for-merge	'refs/pull/202/head' of https://github.com/luvit/luvi
+bf546eb495f0199adf74f746748ad121bf7d7c77	not-for-merge	'refs/pull/203/head' of https://github.com/luvit/luvi
+62e692512feb6d91470706e1f5b2318ae94cfeeb	not-for-merge	'refs/pull/204/head' of https://github.com/luvit/luvi
+15efecc1fdf1d5032b603c8854c0c027a41c4efd	not-for-merge	'refs/pull/205/head' of https://github.com/luvit/luvi
+c6a823a000e9e5e80309638823843543ea2d7a8c	not-for-merge	'refs/pull/206/head' of https://github.com/luvit/luvi
+3d566f0cd90f6a44c90de3d3d91783457eb48f17	not-for-merge	'refs/pull/209/head' of https://github.com/luvit/luvi
+0c99c53a73749e742c9dcee64213f68962bb4111	not-for-merge	'refs/pull/21/head' of https://github.com/luvit/luvi
+359285535bd96331fc7938db0dc7a97835ea7a29	not-for-merge	'refs/pull/210/head' of https://github.com/luvit/luvi
+9e050a428e368ccbccfc1ac31ad49757d3dceb67	not-for-merge	'refs/pull/212/head' of https://github.com/luvit/luvi
+67b7ee6c28a600191dbf4a93df9fa810500ddf0a	not-for-merge	'refs/pull/213/head' of https://github.com/luvit/luvi
+a083a6815898cfd559bde693390fb7c3c7665a11	not-for-merge	'refs/pull/214/head' of https://github.com/luvit/luvi
+ce686077393c3b7616386c1b4507d82df314bc31	not-for-merge	'refs/pull/215/head' of https://github.com/luvit/luvi
+9ff70b8c3602967bb328ac9b891afbc18fb5ff72	not-for-merge	'refs/pull/216/head' of https://github.com/luvit/luvi
+e908183be82b754db6819688b874c4ab20518596	not-for-merge	'refs/pull/217/head' of https://github.com/luvit/luvi
+59875dadb68c487b41fc57c1b4fcece21424d768	not-for-merge	'refs/pull/22/head' of https://github.com/luvit/luvi
+cc8fe99b7941c994c2598a02374d69b2ee53f646	not-for-merge	'refs/pull/220/head' of https://github.com/luvit/luvi
+badfee1a1e474c8484564584c5dc2da52be40466	not-for-merge	'refs/pull/221/head' of https://github.com/luvit/luvi
+0d2b0f6a9d5a2e50450848d3a097a70495bc9045	not-for-merge	'refs/pull/222/head' of https://github.com/luvit/luvi
+76bdeb6791a40a1c3492e0a05a4267f7c9686949	not-for-merge	'refs/pull/224/head' of https://github.com/luvit/luvi
+079f2104d1dd7b9b05fef887a7f455309fe0daf4	not-for-merge	'refs/pull/226/head' of https://github.com/luvit/luvi
+53247a39b4b8cdd702f54478647f68e8300d553e	not-for-merge	'refs/pull/227/head' of https://github.com/luvit/luvi
+073c5b199635b65ca996f3c02a32a23586a11829	not-for-merge	'refs/pull/228/head' of https://github.com/luvit/luvi
+18813ab5faae0eeaccf4c4e244e9c075c17b446a	not-for-merge	'refs/pull/229/head' of https://github.com/luvit/luvi
+d3ae92eb95cc7d65c9f88a8edad386eca836c517	not-for-merge	'refs/pull/23/head' of https://github.com/luvit/luvi
+16117e36a3daf6d55a5285145d4429de9d5a8ecd	not-for-merge	'refs/pull/233/head' of https://github.com/luvit/luvi
+e189a3d1cdac7e5f6782a5ddaa9f83f3cd61be44	not-for-merge	'refs/pull/234/head' of https://github.com/luvit/luvi
+1c6567b6615d07ffca3c48056e0537615ebf3185	not-for-merge	'refs/pull/237/head' of https://github.com/luvit/luvi
+611a5fa196639482ed1ea5d8e9a9d37482fa914d	not-for-merge	'refs/pull/239/head' of https://github.com/luvit/luvi
+6ea05786b233fe2c3856e14ba438be3bf98dd31e	not-for-merge	'refs/pull/24/head' of https://github.com/luvit/luvi
+be8226a5ac1fd41c2a69e4ce87c4721ff98c3890	not-for-merge	'refs/pull/24/merge' of https://github.com/luvit/luvi
+fc078e81ff96e8b4d65f5086a4030c6d0f21fa11	not-for-merge	'refs/pull/240/head' of https://github.com/luvit/luvi
+f2457ad3e91a6bcf53bc8f5cab835262f95d4296	not-for-merge	'refs/pull/245/head' of https://github.com/luvit/luvi
+87a990f643e0be07e8df0964bd74b04d2aa16a87	not-for-merge	'refs/pull/246/head' of https://github.com/luvit/luvi
+069c8778e261d65acbeb900dd3ada6542c8ae32c	not-for-merge	'refs/pull/248/head' of https://github.com/luvit/luvi
+63ac7708878a2fd6a2187375ac9b22f8e680ccce	not-for-merge	'refs/pull/25/head' of https://github.com/luvit/luvi
+0b76d551192a92074aca749185ddef635deb6cc0	not-for-merge	'refs/pull/250/head' of https://github.com/luvit/luvi
+1f835eb7a024539e261ef7fb33d61d1580b6653b	not-for-merge	'refs/pull/251/head' of https://github.com/luvit/luvi
+7ef9ef52e04ab754cdb3db8659e402582501067e	not-for-merge	'refs/pull/252/head' of https://github.com/luvit/luvi
+39d40b0efade47e773f43588361c00bb97d80436	not-for-merge	'refs/pull/253/head' of https://github.com/luvit/luvi
+ce3e77f17d74617bb99725e648c83a23d492c0ae	not-for-merge	'refs/pull/254/head' of https://github.com/luvit/luvi
+61f317dc4806cf0e5056be84598d9db8907b19aa	not-for-merge	'refs/pull/255/head' of https://github.com/luvit/luvi
+d88df15ba9627d62939a71f7bd4825f9c2acddfd	not-for-merge	'refs/pull/256/head' of https://github.com/luvit/luvi
+dbc79c47bf0711cbb7dfb1210fb4aa823ef103c5	not-for-merge	'refs/pull/257/head' of https://github.com/luvit/luvi
+7060a5d3df70189990b957d340b1533e7dd3e4fb	not-for-merge	'refs/pull/258/head' of https://github.com/luvit/luvi
+c05e404618d6fda711daaa442c16553fcefd4d5b	not-for-merge	'refs/pull/259/head' of https://github.com/luvit/luvi
+392c9887b70ed7ce53e7278b970c291508440fa0	not-for-merge	'refs/pull/26/head' of https://github.com/luvit/luvi
+9dff606628304664eeb5c6eea239cb445a95b85c	not-for-merge	'refs/pull/260/head' of https://github.com/luvit/luvi
+b2e501deb407c44a9a3e7f4d8e4b5dc500e7a196	not-for-merge	'refs/pull/261/head' of https://github.com/luvit/luvi
+9ff71acec58b6fb13abdf6a276b35981b4659039	not-for-merge	'refs/pull/262/head' of https://github.com/luvit/luvi
+eba764e695ca18b3983f9e2922091b5df5474e17	not-for-merge	'refs/pull/263/head' of https://github.com/luvit/luvi
+9e2ff3419ab4f20f078119fb6dd5ebd80f0c8c32	not-for-merge	'refs/pull/265/head' of https://github.com/luvit/luvi
+7d3c215ceec7d445dd9604f0e1b87da88cd51cbb	not-for-merge	'refs/pull/268/head' of https://github.com/luvit/luvi
+6ca4e2f04d3d9142c2ad7afcd85cfe22cf110ade	not-for-merge	'refs/pull/27/head' of https://github.com/luvit/luvi
+8a8515ba8730987ee8e4117a974d839d745fc44d	not-for-merge	'refs/pull/270/head' of https://github.com/luvit/luvi
+2ad881ab7241cef9fa820b1d69de1a19282e367e	not-for-merge	'refs/pull/271/head' of https://github.com/luvit/luvi
+b0f7568a40557698e552da52c72b9d6258ac29c3	not-for-merge	'refs/pull/272/head' of https://github.com/luvit/luvi
+d643cbb27865f5503e34679b0a66822dc4f2d85f	not-for-merge	'refs/pull/28/head' of https://github.com/luvit/luvi
+996ea0ee9d7aa7e2ecb09e1d9ff44067a7d2a240	not-for-merge	'refs/pull/29/head' of https://github.com/luvit/luvi
+393846e8bd2f3221d31d0b02d4d18ee74850090b	not-for-merge	'refs/pull/3/head' of https://github.com/luvit/luvi
+0661f2bc94dfd9a66bf719e4dad1829ddbcd89a0	not-for-merge	'refs/pull/30/head' of https://github.com/luvit/luvi
+7cc478b3ebd23c88054dde814f97ef81a2fb4d57	not-for-merge	'refs/pull/33/head' of https://github.com/luvit/luvi
+bbc9c7cc74133a74026c0a72a7f5323043aeff0a	not-for-merge	'refs/pull/34/head' of https://github.com/luvit/luvi
+624d8b05ece3b85db967a19286ca3ee878d290cc	not-for-merge	'refs/pull/35/head' of https://github.com/luvit/luvi
+4492c08f20a02fa8d8cf1402b4e4a01680743388	not-for-merge	'refs/pull/36/head' of https://github.com/luvit/luvi
+c02d527642d4a25d72acc4697421fb74fb4cda9c	not-for-merge	'refs/pull/37/head' of https://github.com/luvit/luvi
+a452e88729efe99eb3129cdb3f721cbffbb941fd	not-for-merge	'refs/pull/38/head' of https://github.com/luvit/luvi
+f7f66a2ccc3c17bbb2fe106b1eaa2834add9dd8d	not-for-merge	'refs/pull/39/head' of https://github.com/luvit/luvi
+c0b7e9324e418586d45f8fe18a0b8f4ec366f1e4	not-for-merge	'refs/pull/4/head' of https://github.com/luvit/luvi
+d8a0c3cdd31d4b6c3f09f10dda447adac1faeffc	not-for-merge	'refs/pull/40/head' of https://github.com/luvit/luvi
+8c27dbc4eef4ec4040843891ec573f344eb4ee5d	not-for-merge	'refs/pull/41/head' of https://github.com/luvit/luvi
+85c67c96b7e6c2e79af98d4365332496642f7639	not-for-merge	'refs/pull/43/head' of https://github.com/luvit/luvi
+2c5da845d145d35b5c117bb7ee47a7c51f9c596d	not-for-merge	'refs/pull/44/head' of https://github.com/luvit/luvi
+65eac46ae19d43e881bb46f197e45c84accaa8a4	not-for-merge	'refs/pull/45/head' of https://github.com/luvit/luvi
+a18a2775092f19f0abd9ca93f6545fd8465c4798	not-for-merge	'refs/pull/46/head' of https://github.com/luvit/luvi
+8ad251a3fc433f787c69fa19f460c329c75731ee	not-for-merge	'refs/pull/47/head' of https://github.com/luvit/luvi
+c9d81ba44bbb5b54158b380ebcb0911216412f6a	not-for-merge	'refs/pull/49/head' of https://github.com/luvit/luvi
+cca82aec3efececa12147de3d019a872e31b83b1	not-for-merge	'refs/pull/5/head' of https://github.com/luvit/luvi
+c5b684764c89c1a14b830a127913853488a6d3b5	not-for-merge	'refs/pull/50/head' of https://github.com/luvit/luvi
+aedd4ae3ca7ca41a17e037acc7a81936b1dd9107	not-for-merge	'refs/pull/52/head' of https://github.com/luvit/luvi
+7186165c0608f382b41d75ba8c388f318a1e1eb9	not-for-merge	'refs/pull/53/head' of https://github.com/luvit/luvi
+ee8b9bad29384932f740206a417cbd66917c7a95	not-for-merge	'refs/pull/54/head' of https://github.com/luvit/luvi
+56de537e1f6d635520f458a2fa05e944d06dda60	not-for-merge	'refs/pull/55/head' of https://github.com/luvit/luvi
+8e15087bc7775dc2d9ccd211225f86fcdf5412c4	not-for-merge	'refs/pull/56/head' of https://github.com/luvit/luvi
+c0f2bdbe8b0669a94ca4bd33a5acf5fc09c14eee	not-for-merge	'refs/pull/57/head' of https://github.com/luvit/luvi
+2759e549c39ed6126e79caa8bee07a492f3fb63f	not-for-merge	'refs/pull/58/head' of https://github.com/luvit/luvi
+5c9c8b75e2ee179d56de86d730535bcbba6edb52	not-for-merge	'refs/pull/59/head' of https://github.com/luvit/luvi
+3d0f73a93b0e706494131cd5310410f063a562d9	not-for-merge	'refs/pull/6/head' of https://github.com/luvit/luvi
+9df4450539f7953b05901d1109d0d7cf374737a7	not-for-merge	'refs/pull/61/head' of https://github.com/luvit/luvi
+43f4f700937c179e2c126daec8e5a19e48126cb5	not-for-merge	'refs/pull/62/head' of https://github.com/luvit/luvi
+675ce2baa4c860ff2b7c27533be58accac8b7909	not-for-merge	'refs/pull/63/head' of https://github.com/luvit/luvi
+100a8bf08ba9b89b9630aef7df627579020e7d85	not-for-merge	'refs/pull/65/head' of https://github.com/luvit/luvi
+6a7b1e08d7f01be845557534a78902f4b76c5f78	not-for-merge	'refs/pull/65/merge' of https://github.com/luvit/luvi
+ef9e1a16fb37bbeb0abae4ddaaae3378eea68f96	not-for-merge	'refs/pull/66/head' of https://github.com/luvit/luvi
+44b03ceec0cd0193cc820fb02434764c17202595	not-for-merge	'refs/pull/67/head' of https://github.com/luvit/luvi
+aa50ae1f4217095f5a7b320a9faa1bdc961aaac6	not-for-merge	'refs/pull/68/head' of https://github.com/luvit/luvi
+400f8e6631df498beaf91851c38b206824264a75	not-for-merge	'refs/pull/69/head' of https://github.com/luvit/luvi
+2d81a22ee6ab54ad66c1fc90d9662f794ec56bca	not-for-merge	'refs/pull/7/head' of https://github.com/luvit/luvi
+7c86b7d30839809c460b36454321551847859f5c	not-for-merge	'refs/pull/70/head' of https://github.com/luvit/luvi
+79e206ac1412eab038223f62611c0851fc392968	not-for-merge	'refs/pull/71/head' of https://github.com/luvit/luvi
+3c752c8ab45af262bb2fe2e1cee81da89787a2ad	not-for-merge	'refs/pull/72/head' of https://github.com/luvit/luvi
+367f6fe0e13a2c3814b3868686ff4a2b303d91e8	not-for-merge	'refs/pull/75/head' of https://github.com/luvit/luvi
+57b248724a8c84ca07938c09a9cce294587829bb	not-for-merge	'refs/pull/75/merge' of https://github.com/luvit/luvi
+5a4f6b6d7429db24ddbb187e491ffc7e90dd5e57	not-for-merge	'refs/pull/76/head' of https://github.com/luvit/luvi
+50c938469f8bd4a6e1b7147eadb468a74c2dd314	not-for-merge	'refs/pull/78/head' of https://github.com/luvit/luvi
+7d013dba54b254dbd4260805ccd1d7245da2b020	not-for-merge	'refs/pull/79/head' of https://github.com/luvit/luvi
+b05514eaa05586df83b6fb49baf5b37d5418a77c	not-for-merge	'refs/pull/8/head' of https://github.com/luvit/luvi
+77a1ee0ee0c8b1b8c94eebe45337b3cdc522195c	not-for-merge	'refs/pull/83/head' of https://github.com/luvit/luvi
+31979de7519fc042e73476f24a7eba2c5dc2f026	not-for-merge	'refs/pull/85/head' of https://github.com/luvit/luvi
+87baedc0953345f702f191d1362f5c49e01488a8	not-for-merge	'refs/pull/86/head' of https://github.com/luvit/luvi
+45f2ef6135637807ca91c3cc5bcca3abf769b32c	not-for-merge	'refs/pull/88/head' of https://github.com/luvit/luvi
+e081b78e2c73990c150c5b7bf3d07c76b774380c	not-for-merge	'refs/pull/89/head' of https://github.com/luvit/luvi
+4f51f9f1bdf0cc5a377500a35f86bc7b78028c94	not-for-merge	'refs/pull/9/head' of https://github.com/luvit/luvi
+704a73f292ee0f301ac2c0dc5e2b9df10743003a	not-for-merge	'refs/pull/90/head' of https://github.com/luvit/luvi
+8d8c1c8f60a877368633c2716e54f5691e2a8a66	not-for-merge	'refs/pull/91/head' of https://github.com/luvit/luvi
+50a3e19665c7fd9368f9e994b1c53e628c600c3c	not-for-merge	'refs/pull/92/head' of https://github.com/luvit/luvi
+1df5918cd61c349d38b0d481d84c084b1ffc9acf	not-for-merge	'refs/pull/94/head' of https://github.com/luvit/luvi
+dce18d6794ee3cbc26d2bcaf315fe0e26891b5ee	not-for-merge	'refs/pull/95/head' of https://github.com/luvit/luvi
+dcf11d06a1d4d2008bdfbfbe29c52bafaae71fc0	not-for-merge	'refs/pull/95/merge' of https://github.com/luvit/luvi
+f9a101de48d9b0cdf2a977f33935172fac044b60	not-for-merge	'refs/pull/96/head' of https://github.com/luvit/luvi
+b4dc6c1338e1830dc8bf2b7c0ad41c9f80cbaf3b	not-for-merge	'refs/pull/98/head' of https://github.com/luvit/luvi
+bee6445f8ef5af794369e191b9ec43494edce415	not-for-merge	'refs/pull/99/head' of https://github.com/luvit/luvi
+08200cc6778b4fc1629abba6d569b06c508b423d	not-for-merge	tag 'v0.1.0' of https://github.com/luvit/luvi
+509b93b3e7c6a585caf5e0f5811f8164bf2389a9	not-for-merge	tag 'v0.2.0' of https://github.com/luvit/luvi
+e784821e0d4f40f2f57bcdc3f85b23210297fb09	not-for-merge	tag 'v0.2.1' of https://github.com/luvit/luvi
+1239c0b2587e0b23effe4ee050956adc1943f984	not-for-merge	tag 'v0.3.0' of https://github.com/luvit/luvi
+93ff2dfc9b564de3466bfe2c3b107df6edecbaef	not-for-merge	tag 'v0.4.0' of https://github.com/luvit/luvi
+9e7176dd7578bfecfa5ed20876a39e7ac671e155	not-for-merge	tag 'v0.4.1' of https://github.com/luvit/luvi
+177f066e4a5ec4fa11c47e625eb89ac07dede36a	not-for-merge	tag 'v0.4.2' of https://github.com/luvit/luvi
+0c5d20e85fdfce0758d597560d7ec490fda994b5	not-for-merge	tag 'v0.5.0' of https://github.com/luvit/luvi
+bda73ab437d7d1bfe493a1d732bbde93fd5629d3	not-for-merge	tag 'v0.5.1' of https://github.com/luvit/luvi
+1ee5315f253fb90d9b7cbe34424c81b915f6ee83	not-for-merge	tag 'v0.5.2' of https://github.com/luvit/luvi
+fbd0fc6c9201454cdb292eebc750ee2969c7fba6	not-for-merge	tag 'v0.5.3' of https://github.com/luvit/luvi
+46327f80cbf8a7d39b6dea39828d0876bbba6d3f	not-for-merge	tag 'v0.5.4' of https://github.com/luvit/luvi
+0de461ce96d0eba8c18060090480344a115466f5	not-for-merge	tag 'v0.5.5' of https://github.com/luvit/luvi
+cd26d7255f29383db4cf09bcbb70cc3283373035	not-for-merge	tag 'v0.5.6' of https://github.com/luvit/luvi
+4ede8f3a5f396d92f17d68405869125dba72c39a	not-for-merge	tag 'v0.5.7' of https://github.com/luvit/luvi
+33dbc3949899653a232f32d740f5283dc15b07b1	not-for-merge	tag 'v0.6.0' of https://github.com/luvit/luvi
+833674d3fc6d8e023de00c5d8cd8839782e3deb9	not-for-merge	tag 'v0.6.1' of https://github.com/luvit/luvi
+8f6d5f0cddbba515c74813b86b02e91f374ed442	not-for-merge	tag 'v0.6.2' of https://github.com/luvit/luvi
+aae00b1ed0431232012654210d7a9b966bdce83a	not-for-merge	tag 'v0.6.3' of https://github.com/luvit/luvi
+2ea89a6c0f5b260faeb8c8544c3339df892c3099	not-for-merge	tag 'v0.6.4' of https://github.com/luvit/luvi
+436e8e05f97296017739f3c7a031024f2b6e5866	not-for-merge	tag 'v0.6.5' of https://github.com/luvit/luvi
+258ef5fc299f6187733b135baa21ab1a69987064	not-for-merge	tag 'v0.6.6' of https://github.com/luvit/luvi
+950119bf8262c8238da1b88282de297ec5ebe9fa	not-for-merge	tag 'v0.7.0' of https://github.com/luvit/luvi
+d06c250a8d30a0d6a3a12fe95bea46dd7c50bda5	not-for-merge	tag 'v0.7.1' of https://github.com/luvit/luvi
+21356e71d9b710e2801c33f3b77790694e1cf286	not-for-merge	tag 'v0.8.0' of https://github.com/luvit/luvi
+c74e421803475dd0f04165678f6f0c316fb16ef1	not-for-merge	tag 'v0.8.1' of https://github.com/luvit/luvi
+b54cf71ab851a309eee95bde56be0965548192dd	not-for-merge	tag 'v1.0.0' of https://github.com/luvit/luvi
+8238f9a5afa6fb568d63ea06c87e9e889fbf99f9	not-for-merge	tag 'v1.0.1' of https://github.com/luvit/luvi
+3702513ec17ad53efd1a1d164509cc58823ff0da	not-for-merge	tag 'v1.1.0' of https://github.com/luvit/luvi
+ada7b4e8f046eb4fd9ffd21b52ea057f04f57e37	not-for-merge	tag 'v2.0.0' of https://github.com/luvit/luvi
+8347d4b9663eec10c7116911ea217cdd908df73b	not-for-merge	tag 'v2.0.1' of https://github.com/luvit/luvi
+3a60bfc3fa455580d57d3a1daf9ee2d2deb252e8	not-for-merge	tag 'v2.0.2' of https://github.com/luvit/luvi
+ecb6a62801d2a5ce4a2215b6b07ff7141a1338a0	not-for-merge	tag 'v2.0.3' of https://github.com/luvit/luvi
+9158b61ce3355c8a5be9a13779600d72a45d5f32	not-for-merge	tag 'v2.0.4' of https://github.com/luvit/luvi
+02ef6d980b9bb27b72c15a3f738fd0b5bfdbb0fe	not-for-merge	tag 'v2.0.5' of https://github.com/luvit/luvi
+b7cf20daeb26bd7b0ecfa52fc461c7f57b1a693c	not-for-merge	tag 'v2.0.6' of https://github.com/luvit/luvi
+4d7c3d6482b79f71900658ba8a5361f6e2bd518c	not-for-merge	tag 'v2.0.7' of https://github.com/luvit/luvi
+ce5b225be587e11330b205677d1ec2c936a4ce14	not-for-merge	tag 'v2.0.8' of https://github.com/luvit/luvi
+86dd250a149929e10d77b9fa9f07b5cd29e811ba	not-for-merge	tag 'v2.0.9' of https://github.com/luvit/luvi
+a889e9ad9f8c55f103f749e1da34875923a8c4bd	not-for-merge	tag 'v2.1.0' of https://github.com/luvit/luvi
+088af949571822b47225a39adf676918bf6653bf	not-for-merge	tag 'v2.1.1' of https://github.com/luvit/luvi
+26b0a26d01281227b69e53c677d73a6e5c3ea253	not-for-merge	tag 'v2.1.2' of https://github.com/luvit/luvi
+7c420d60ac76bd7d13d66bb23538e14d138d9431	not-for-merge	tag 'v2.1.3' of https://github.com/luvit/luvi
+f504ff62540434d2a1e953c81e5d829b247c9d97	not-for-merge	tag 'v2.1.4' of https://github.com/luvit/luvi
+f7bbf42dada64af0c9e631dd6eea0e57f0ba525e	not-for-merge	tag 'v2.1.5' of https://github.com/luvit/luvi
+413229aa72f55a2f197fed4f446fd05298058551	not-for-merge	tag 'v2.1.6' of https://github.com/luvit/luvi
+9d5948dc2877972f939b00465ae60073a5154de9	not-for-merge	tag 'v2.1.7' of https://github.com/luvit/luvi
+bb1e11a696d0a5ebd255384fa18d50d2a3f8d7ef	not-for-merge	tag 'v2.1.8' of https://github.com/luvit/luvi
+f44e26d9d4f160294328c024827a5c935c5e0eee	not-for-merge	tag 'v2.10.0' of https://github.com/luvit/luvi
+a758967858a6b9161b7774f64014065ffbd819d0	not-for-merge	tag 'v2.10.1' of https://github.com/luvit/luvi
+326960f951f71d1ba3e0bef2f3c4142f45663aca	not-for-merge	tag 'v2.11.0' of https://github.com/luvit/luvi
+5d1052f11e813ff9edc3ec75b5282b3e6cb0f3bf	not-for-merge	tag 'v2.12.0' of https://github.com/luvit/luvi
+2be5441f6d85dbb81cb4b37bc67a58a89901e866	not-for-merge	tag 'v2.13.0' of https://github.com/luvit/luvi
+450ec116aef6f8cb0cba83c7e61c9bce112d6deb	not-for-merge	tag 'v2.14.0' of https://github.com/luvit/luvi
+b7d44190bfa98b8fe634f791572ef511b77099fb	not-for-merge	tag 'v2.2.0' of https://github.com/luvit/luvi
+fab85f1d5504066701c4c5fea0d8afa99efa7068	not-for-merge	tag 'v2.3.0' of https://github.com/luvit/luvi
+a8cf8598b2c6b1a9ce41eedb46fef1afd0fb28fa	not-for-merge	tag 'v2.3.1' of https://github.com/luvit/luvi
+8a485bd195f9d560473b129742f84ef3ccfc2997	not-for-merge	tag 'v2.3.2' of https://github.com/luvit/luvi
+ac743ee3bc87bed989c178f9db2a469708464101	not-for-merge	tag 'v2.3.3' of https://github.com/luvit/luvi
+99778b6bcc5f18aea40c6256935fecb8eb8e92e8	not-for-merge	tag 'v2.3.4' of https://github.com/luvit/luvi
+01e08c75eafb8c1588444f28e073c5b8a0c1e3c9	not-for-merge	tag 'v2.3.5' of https://github.com/luvit/luvi
+2e53f05f89e09c0a5b4ccdea651d0baaf694462f	not-for-merge	tag 'v2.4.0' of https://github.com/luvit/luvi
+17e45aae5fef42a88d358f63c87917020c915ed3	not-for-merge	tag 'v2.5.0' of https://github.com/luvit/luvi
+701ed70d678dfc10830ef399c74b21025de5b900	not-for-merge	tag 'v2.5.1' of https://github.com/luvit/luvi
+0f2f1cbd7f03f6e608e297f85d0d2d18022ec174	not-for-merge	tag 'v2.5.2' of https://github.com/luvit/luvi
+fd771e58ecda97cdf9b5ee99b1397a345ec47d7f	not-for-merge	tag 'v2.6.0' of https://github.com/luvit/luvi
+f8fda99921cfa7269f1a14a9184e1e519e205131	not-for-merge	tag 'v2.6.1' of https://github.com/luvit/luvi
+e39d1377fcbf0780204ac2590a0391611208ed13	not-for-merge	tag 'v2.7.0' of https://github.com/luvit/luvi
+b66a710b4db6a199bda7864275b09ea35dca8b84	not-for-merge	tag 'v2.7.1' of https://github.com/luvit/luvi
+b98c2674f7e020080a7bc7247c30278e563069e1	not-for-merge	tag 'v2.7.2' of https://github.com/luvit/luvi
+9661a4bceb4e977f7275d170c033d95e11f15870	not-for-merge	tag 'v2.7.3' of https://github.com/luvit/luvi
+f70d13e8da7d7134fdbfcecd87360ef90e9823da	not-for-merge	tag 'v2.7.4' of https://github.com/luvit/luvi
+6c90ef7fec2d38319030c1d223e120d50c6836b6	not-for-merge	tag 'v2.7.5' of https://github.com/luvit/luvi
+d32e6791d2e8b9955ac2984cca98c79d414156ba	not-for-merge	tag 'v2.7.6' of https://github.com/luvit/luvi
+16ad61e5a3fbc2cd2544385900550660d2ff0e67	not-for-merge	tag 'v2.8.0' of https://github.com/luvit/luvi
+f10bf0bd4a8ae431b5294ddbeaeceaba1b03b692	not-for-merge	tag 'v2.9.0' of https://github.com/luvit/luvi
+6d02c544427db6011219de8e398fd907569bd985	not-for-merge	tag 'v2.9.1' of https://github.com/luvit/luvi
+377e21ca163ec406248624b6556722217344ed13	not-for-merge	tag 'v2.9.2' of https://github.com/luvit/luvi
+75431231088afcbb5e80178ccac1377543f213a2	not-for-merge	tag 'v2.9.3' of https://github.com/luvit/luvi

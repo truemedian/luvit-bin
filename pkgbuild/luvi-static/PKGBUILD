@@ -1,0 +1,64 @@
+# Maintainer: Truemedian <truemedian at gmail dot com>
+
+_pkgname='luvi'
+pkgname="$_pkgname-static"
+pkgver=2.14.0.r7.72b7488
+pkgrel=1
+arch=('i686' 'x86_64' 'arm' 'armv6h' 'armv7h')
+url="https://github.com/luvit/luvi"
+license=('Apache')
+provides=("$_pkgname")
+conflicts=("$_pkgname")
+depends=('libuv' 'pcre' 'openssl')
+makedepends=('cmake' 'git')
+source=("git+$url.git")
+sha256sums=('SKIP')
+
+pkgver() {
+    cd "$_pkgname"
+
+    # Most luvi tags are prefixed with a 'v'
+    _pkgver="$(git describe --long --tags | sed 's/\([^-]*-\)g/r\1/;s/-/./g')"
+    printf "%s" ${_pkgver#v}
+}
+
+prepare() {
+    cd "$srcdir/$_pkgname"
+
+    _pkgver="$(echo "$pkgver" | cut -d'-' -f1)"
+    echo "$_pkgver" >VERSION
+
+    git submodule init
+    git config --remove-section submodule.deps/lua-zlib || true
+    git config --remove-section submodule.deps/zlib || true
+    git submodule update
+
+    cd "$srcdir/luvi/deps/luv"
+
+    git submodule init
+    git config --remove-section submodule.lua || true
+    git submodule update
+
+    cd "$srcdir/luvi/deps/lua-openssl"
+
+    git submodule update --init
+}
+
+build() {
+    cd "$srcdir/$_pkgname"
+
+    make regular
+    make
+}
+
+check() {
+    cd "$srcdir/$_pkgname"
+    make test
+}
+
+package() {
+    cd "$srcdir/$_pkgname"
+
+    mkdir -p "$pkgdir/usr/bin"
+    make LUVI_PREFIX="$pkgdir/usr" install
+}
