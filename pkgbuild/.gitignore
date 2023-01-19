@@ -1,0 +1,10 @@
+src/
+pkg/
+*.tar*
+*.zip
+
+luvi/luvi
+
+lit-git/lit
+luvit-git/luvit
+luvi-git/luvi

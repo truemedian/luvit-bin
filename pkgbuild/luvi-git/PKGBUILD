@@ -1,0 +1,70 @@
+# Maintainer: Truemedian <truemedian at gmail dot com>
+
+_pkgname='luvi'
+pkgname="$_pkgname-git"
+pkgver=2.14.0.r7.72b7488
+pkgrel=1
+arch=('i686' 'x86_64' 'arm' 'armv6h' 'armv7h')
+url="https://github.com/luvit/luvi"
+license=('Apache')
+provides=("$_pkgname")
+conflicts=("$_pkgname")
+depends=('libuv' 'pcre' 'openssl')
+makedepends=('cmake' 'git')
+source=("git+$url.git"
+        "fix-build-scripts.patch")
+sha256sums=('SKIP'
+            '1d03935683efccbcd3bad0e9bfbd10ef583c1b8ef8207be76e8cea74e70ed7c2')
+
+pkgver() {
+    cd "$_pkgname"
+
+    # Most luvi tags are prefixed with a 'v'
+    _pkgver="$(git describe --long --tags | sed 's/\([^-]*-\)g/r\1/;s/-/./g')"
+    printf "%s" ${_pkgver#v}
+}
+
+prepare() {
+    cd "$srcdir/$_pkgname"
+
+    _pkgver="$(echo "$pkgver" | cut -d'-' -f1)"
+    echo "$_pkgver" > VERSION
+
+    patch -p2 -i ../fix-build-scripts.patch
+
+    git submodule init
+    git config --remove-section submodule.deps/lua-zlib || true # zlib is disabled by default
+    git config --remove-section submodule.deps/zlib || true     # zlib is disabled by default
+    git config --remove-section submodule.deps/pcre || true     # pcre will be shared
+    git submodule update
+
+    cd "$srcdir/$_pkgname/deps/luv"
+
+    git submodule init
+    git config --remove-section submodule.libuv || true # libuv is shared
+    git config --remove-section submodule.lua || true   # luajit is the default lua
+    git submodule update
+
+    cd "$srcdir/$_pkgname/deps/lua-openssl"
+
+    git submodule update --init
+}
+
+build() {
+    cd "$srcdir/$_pkgname"
+
+    make CPACK_FLAGS="-DWITH_SHARED_LIBUV=ON -DWithSharedPCRE=ON" regular-shared
+    make
+}
+
+check() {
+    cd "$srcdir/$_pkgname"
+    make test
+}
+
+package() {
+    cd "$srcdir/$_pkgname"
+
+	mkdir -p "$pkgdir/usr/bin"
+	make LUVI_PREFIX="$pkgdir/usr" install
+}

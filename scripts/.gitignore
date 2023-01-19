@@ -1,8 +1,0 @@
-pkg
-src
-*.tar.*
-
-luvit/luvit/
-luvi/luvi/
-luvi-static/luvi/
-lit/lit/

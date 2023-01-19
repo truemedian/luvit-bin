@@ -1,0 +1,22 @@
+# Maintainer: Truemedian <truemedian at gmail dot com>
+
+pkgname='lit'
+pkgver=3.8.5
+pkgrel=1
+arch=('i686' 'x86_64' 'arm' 'armv6h' 'armv7h')
+url="https://github.com/luvit/lit"
+license=('Apache')
+depends=('luvi')
+source=("$pkgname-$pkgver.zip::https://lit.luvit.io/packages/luvit/lit/v$pkgver.zip")
+sha256sums=('ca5cb8107c14173ee700577d8772651b0148a782f42fe2b9ccc86e7d752a4e5b')
+options=(!strip)
+
+build() {
+    luvi . -- make . lit "$(which luvi)"
+}
+
+# Note: `lit` is taken by llvm, so we use `lulit` instead.
+package() {
+    mkdir -p "$pkgdir/usr/bin"
+    install -p lit "$pkgdir/usr/bin/lulit"
+}

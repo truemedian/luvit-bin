@@ -1,0 +1,56 @@
+# Maintainer: Truemedian <truemedian at gmail dot com>
+
+pkgname='luvi'
+pkgver=2.14.0
+pkgrel=1
+arch=('i686' 'x86_64' 'arm' 'armv6h' 'armv7h')
+url="https://github.com/luvit/luvi"
+license=('Apache')
+depends=('libuv' 'pcre' 'openssl')
+makedepends=('cmake' 'git')
+source=("git+$url.git#tag=v$pkgver" # TODO: remove git dependency
+        "fix-build-scripts.patch")
+sha256sums=('SKIP'
+            '1d03935683efccbcd3bad0e9bfbd10ef583c1b8ef8207be76e8cea74e70ed7c2')
+
+prepare() {
+    cd "$srcdir/$pkgname"
+
+    patch -p2 -i ../fix-build-scripts.patch
+
+    git submodule init
+    git config --remove-section submodule.deps/lua-zlib || true # zlib is disabled by default
+    git config --remove-section submodule.deps/zlib || true     # zlib is disabled by default
+    git config --remove-section submodule.deps/pcre || true     # pcre will be shared
+    git submodule update
+
+    cd "$srcdir/$pkgname/deps/luv"
+
+    git submodule init
+    git config --remove-section submodule.libuv || true # libuv is shared
+    git config --remove-section submodule.lua || true   # luajit is the default lua
+    git submodule update
+
+    cd "$srcdir/$pkgname/deps/lua-openssl"
+
+    git submodule update --init
+}
+
+build() {
+    cd "$srcdir/$pkgname"
+
+    make CPACK_FLAGS="-DWITH_SHARED_LIBUV=ON -DWithSharedPCRE=ON" regular-shared
+    make
+}
+
+check() {
+    cd "$srcdir/$pkgname"
+    make test
+}
+
+package() {
+    cd "$srcdir/$pkgname"
+
+	mkdir -p "$pkgdir/usr/bin"
+	make LUVI_PREFIX="$pkgdir/usr" install
+}
