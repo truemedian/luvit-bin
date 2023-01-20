@@ -1,18 +1,30 @@
 
 # Luvit Binaries
 
-This repository provides build scripts that can be used to build luvit, lit and luvi from their source. Which is
-necessary on systems that luvit does not provide prebuilt luvi binaries for. Releases are managed by a Github Action
-which runs weekly to rebuild the binaries for all supported systems.
+This repository provides build scripts that can be used to build luvit, lit and
+luvi from their source. Which is necessary on systems that luvit does not provide
+prebuilt luvi binaries for. Releases are managed by a Github Action which runs
+weekly to rebuild the binaries for all supported systems.
 
 ## Supported Systems
 
 | Architecture | Systems                |
 | ------------ |:---------------------- |
 | x86_64       | Windows, Darwin, Linux |
+| i386         | Windows                |
 | armv6l       | Linux                  |
 | armv7l       | Linux                  |
 | aarch64      | Linux                  |
+
+> *Note: The above architectures are mostly limited to what is available for*
+> *Github Actions If you would like to see a system added, please open an issue*
+> *and include how such system would be built.*
+
+## PKGBUILDs
+
+This repository provides PKGBUILDS for luvit, lit and luvi. These are mostly used
+for the Arch Linux User Repository, but can be used on any system that supports
+makepkg to build the packages.
 
 ## Install Script
 
