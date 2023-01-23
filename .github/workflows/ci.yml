@@ -1,0 +1,197 @@
+name: Build Binaries
+
+on:
+  push:
+  workflow_dispatch:
+  repository_dispatch:
+
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Prefix & Clone
+        working-directory: ci
+        run: |
+          mkdir -p build
+
+          chmod u+x clone.sh
+          ./clone.sh
+
+      - name: Configure Luvi
+        working-directory: ci/luvi
+        run: make regular-asm
+
+      - name: Build Luvi
+        working-directory: ci/luvi
+        run: make && mv build/luvi ../build/luvi
+
+      - name: Test Luvi
+        working-directory: ci/luvi
+        run: make test
+
+      - name: Build Lit
+        working-directory: ci/lit
+        run: ../build/luvi . -- make . ../build/lit ../build/luvi
+
+      - name: Build Luvit
+        working-directory: ci/luvit
+        run: ../build/lit make . ../build/luvit ../build/luvi
+
+      - name: Upload
+        uses: actions/upload-artifact@v3
+        with:
+          name: Linux-x86_64
+          path: ci/build
+
+  macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Prefix & Clone
+        working-directory: ci
+        run: |
+          mkdir -p build
+
+          chmod u+x clone.sh
+          ./clone.sh
+
+      - name: Configure Luvi
+        working-directory: ci/luvi
+        run: make regular-asm
+
+      - name: Build Luvi
+        working-directory: ci/luvi
+        run: make && mv build/luvi ../build/luvi
+
+      - name: Test Luvi
+        working-directory: ci/luvi
+        run: make test
+
+      - name: Build Lit
+        working-directory: ci/lit
+        run: ../build/luvi . -- make . ../build/lit ../build/luvi
+
+      - name: Build Luvit
+        working-directory: ci/luvit
+        run: ../build/lit make . ../build/luvit ../build/luvi
+
+      - name: Upload
+        uses: actions/upload-artifact@v3
+        with:
+          name: Darwin-x86_64
+          path: ci/build
+
+  windows:
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        arch: [i386, x86_64]
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Cache Dependencies
+        uses: actions/cache@v3
+        id: cache
+        with:
+          path: C:\Program Files\NASM
+          key: ${{ runner.os }}-nasm
+
+      - name: Install Dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: choco install NASM
+
+      - name: Setup PATH
+        shell: pwsh
+        run: Write-Output "C:\Program Files\NASM" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
+      - name: Setup Prefix & Clone
+        working-directory: ci
+        run: |
+          mkdir -p build
+          ./clone.ps1
+
+      - name: Configure Luvi
+        working-directory: ci/luvi
+        run: |
+          if ( "${{ matrix.arch }}" -eq "i386" ) {
+              &./make.bat regular32-asm
+          } else {
+              &./make.bat regular-asm
+          }
+
+      - name: Build Luvi
+        working-directory: ci/luvi
+        run: |
+          &./make.bat
+
+          Move-Item luvi.exe ../build/luvi.exe
+
+      - name: Test Luvi
+        working-directory: ci/luvi
+        run: |
+          &./make.bat test
+
+      - name: Build Lit
+        working-directory: ci/lit
+        run: |
+          &../build/luvi.exe . -- make . ../build/lit.exe ../build/luvi.exe
+
+      - name: Build Luvit
+        working-directory: ci/luvit
+        run: |
+          &../build/lit.exe make . ../build/luvit.exe ../build/luvi.exe
+
+      - name: Upload
+        uses: actions/upload-artifact@v3
+        with:
+          name: Windows-${{ matrix.arch }}
+          path: ci/build
+
+  linux-emulated:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        arch: [armv6, armv7, aarch64]
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Prefix & Clone
+        working-directory: ci
+        run: |
+          mkdir -p build
+
+          chmod u+x clone.sh
+          ./clone.sh
+
+      - uses: uraimo/run-on-arch-action@v2
+        name: Build
+        with:
+          distro: stretch
+          arch: ${{ matrix.arch }}
+
+          shell: /bin/bash
+          install: |
+            apt-get update -q -y
+            apt-get install -q -y build-essential perl git cmake
+          run: |
+            cd ci/luvi
+            make regular-asm
+            make && mv build/luvi ../build/luvi
+            make test
+
+            cd ../lit
+            ../build/luvi . -- make . ../build/lit ../build/luvi
+
+            cd ../luvit
+            ../build/lit make . ../build/luvit ../build/luvi
+
+      - name: Upload
+        uses: actions/upload-artifact@v3
+        with:
+          name: Linux-${{ matrix.arch }}
+          path: ci/build

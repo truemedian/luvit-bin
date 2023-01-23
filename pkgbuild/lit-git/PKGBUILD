@@ -32,10 +32,9 @@ build() {
     luvi . -- make . lit "$(which luvi)"
 }
 
-# Note: `lit` is taken by llvm, so we use `lulit` instead.
 package() {
     cd "$_pkgname"
 
     mkdir -p "$pkgdir/usr/bin"
-    install -p lit "$pkgdir/usr/bin/lulit"
+    install -p lit "$pkgdir/usr/bin/lit"
 }
