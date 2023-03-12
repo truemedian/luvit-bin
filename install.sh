@@ -22,7 +22,7 @@ os=$(uname -s)
 
 url="https://github.com/truemedian/luvit-bin/releases/latest/download/luvit-bin-${os}-${arch}.tar.gz"
 
-if command -v curls &>/dev/null; then
+if command -v curl &>/dev/null; then
     log_info "Downloading release from github.com..."
     status=$(curl -sfL -o .luvit.tar.gz -w "%{http_code}" $url)
 
