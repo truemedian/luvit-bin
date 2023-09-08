@@ -61,8 +61,9 @@ run_cmd() {
         $@ >>"${build_root}/install.log"
     fi
 
-    if [ $? -eq 0 ]; then
+    if [ ! $? -eq 0 ]; then
         log_error "Build Failed. See Installation Log @ ${INSTALL_PREFIX}"
+        exit 1
     fi
 }
 
