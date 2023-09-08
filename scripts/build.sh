@@ -1,5 +1,5 @@
 #!/bin/env sh
-set -euo pipefail
+set -uo pipefail
 
 DEFAULT_CMAKE_FLAGS="-DCMAKE_BUILD_TYPE=Release -DWithSharedLibluv=OFF -DWithOpenSSL=ON -DWithSharedOpenSSL=OFF -DWithOpenSSLASM=ON -DWithPCRE=ON -DWithLPEG=ON -DWithSharedPCRE=OFF"
 CMAKE_FLAGS=${CMAKE_FLAGS-$DEFAULT_CMAKE_FLAGS}
@@ -59,6 +59,10 @@ run_cmd() {
         $@ >>"${build_root}/install.log" 2>&1
     else
         $@ >>"${build_root}/install.log"
+    fi
+
+    if [ $? -eq 0 ]; then
+        log_error "Build Failed. See Installation Log @ ${INSTALL_PREFIX}"
     fi
 }
 
@@ -207,7 +211,7 @@ CPUS=$($getconf_command _NPROCESSORS_ONLN 2>/dev/null) ||
     CPUS=1
 
 run_cmd $cmake_command -H. -Bbuild ${CMAKE_FLAGS} -DCMAKE_C_COMPILER="${cc_command}" -DCMAKE_ASM_COMPILER="${cc_command}" -DCMAKE_CXX_COMPILER="${cxx_command}"
-run_cmd $cmake_command --build build -j ${CPUS}
+run_cmd $cmake_command --build build -j${CPUS}
 
 cp build/luvi "$luvi_command"
 cd $build_root
